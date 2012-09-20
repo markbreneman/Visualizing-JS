@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/base.css" />
+		<title>Paper template</title>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="900" height="900"></canvas>
+		<div id="help">
+			<a target="_blank" href="http://paperjs.org/examples">Paper.js examples &rarr;</a><br />
+			<a target="_blank" href="http://paperjs.org/tutorials">Paper.js tutorials &rarr;</a><br />
+		</div>
+		<script charset="utf-8" src="scripts/paper.js"></script>
+		<script charset="utf-8" src="scripts/skip.js"></script>
+		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
+	
+var squareside=90
+
+var square1 = new Path.Rectangle( view.bounds.bottomLeft, squareside )
+square1.fillColor = 'white'
+square1.position = view.center
+// square1.selected=true
+
+var square2 = new Path.Rectangle( view.bounds.bottomLeft, squareside )
+square2.fillColor = 'white'
+square2.position = view.center-2*squareside
+square2.selected=true
+console.log(square2)
+
+
+var square3 = new Path.Rectangle(view.bounds.bottomLeft, squareside )
+square3.fillColor = 'white'
+square3.position = view.center-3*squareside
+// square3.selected=true
+
+
+var square4 = new Path.Rectangle(view.bounds.bottomLeft, squareside )
+square4.fillColor = 'white'
+square4.fillColor.alpha = 0.8
+square4.position = view.center-4*squareside
+// square4.selected=true
+
+
+var text = new PointText(view.center);
+text.paragraphStyle.justification = 'center';
+text.characterStyle.fontSize = 20;
+text.fillColor = 'red';
+text.position=view.size/2;
+
+
+var walk = function(item, event){
+    var myEvent = event;
+       if (Math.round(myEvent.time) <= 30){
+             item.position += new Point( .8,0 );
+             // var angle=Math.sin();
+             // console.log(angle);
+             // item.rotate(angle);
+             
+          }
+        };   
+
+//  Paper calls the onFrame() function with every tick of its clock.
+//  Ideally its clock ticks 60 frames per second.
+
+var onFrame = function(event){
+    text.content = Math.round(event.time);
+    currentTime=event.time;
+    if (event.time < 10){
+            walk(square1, event);
+            walk(square2, event);
+            walk(square3, event);
+            walk(square4, event);
+    // console.log("called walk");
+    };
+    
+	//  onFrame() is passed an argument called 'event'.
+	
+    // console.log( 'Frame number: '+ event.count )
+
+	//  Notice how the rotate() function is relative, not absolute!
+	//  ie. We're not setting the degree of rotation to 1 or -1
+	//  but instead we're adding +1 or -1 to whatever the existing
+	//  state of rotation is.
+    // 
+    // square1.rotate(  1 )
+    // square2.rotate( -1 )
+
+
+	//  Using PaperScript we can add to our current position in a few ways.
+	//  The "proper way" is probably to create a new Point like this:
+
+    // square3.position += new Point( 1, - 1 )
+
+
+	//  But because Paper is flexible we can just use a two-dimensional
+	//  array instead like this if we wanted to and it would be the same:
+	//  square3.position += [ 1, -1 ]
+
+
+	//  Now we'll get fancy:
+	//  We'll just change square4's position by one unit on the X-axis,
+	//  but then have some fun on the Y-axis
+	//  using some math methods created by Skip.js.
+	//  Might as well rotate it too!
+	
+	// square4.position.x -= 4
+	//     square4.position.y = view.bounds.height - square4.position.x.normalize( 0, view.bounds.width ).multiply( PI ).sine().multiply( 300 )
+	//     square4.rotate( 2 )
+	
+}
+
+		</script>
+	</body>
+</html>

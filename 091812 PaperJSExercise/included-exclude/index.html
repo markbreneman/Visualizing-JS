@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/base.css" />
+		<title>Paper template</title>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="960" height="540"></canvas>
+		<div id="help">
+			<a target="_blank" href="http://paperjs.org/examples">Paper.js examples &rarr;</a><br />
+			<a target="_blank" href="http://paperjs.org/tutorials">Paper.js tutorials &rarr;</a><br />
+		</div>
+		<script charset="utf-8" src="scripts/paper.js"></script>
+		<script charset="utf-8" src="scripts/skip.js"></script>
+		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
+	
+	
+	
+
+//  We've specified the canvas size in two places:
+//  Up above in the HTML (this is where the canvas "resolution" is set)
+//  and in the CSS (/styles/bass.css) we set the pixel size.
+//  If these two sizes match we're looking at something 100% resolution.
+//  We also set the background color to black in the CSS.
+
+
+
+
+//  Create a white square-shaped Path
+//  with its upper-left corner at the center of the canvas
+//  and sides 90px long.
+
+var square1 = new Path.Rectangle( view.center, 90 )
+square1.fillColor = 'white'
+
+
+//  Create another square just like it.
+//  Expect afterward we'll set the .position property "manually".
+//  Notice how now the square's center (not its upper-left corner)
+//  is in the canvas's center.
+//  An interesting gotch-ya!
+
+var square2 = new Path.Rectangle( view.center, 90 )
+square2.fillColor = 'white'
+square2.position = view.center
+
+
+//  Now we'll create a third square, 
+//  but with some transparency
+//  and positioned on the bottom-left corner of the canvas.
+
+var square3 = new Path.Rectangle( view.bounds.bottomLeft, 90 )
+square3.fillColor = 'white'
+square3.fillColor.alpha = 0.5
+
+
+//  We'll create another one similiar like it
+//  but in the bottom-right corner.
+
+var square4 = new Path.Rectangle( view.bounds.bottomRight, 90 )
+square4.fillColor = 'white'
+square4.fillColor.alpha = 0.8
+
+
+
+
+//  Paper calls the onFrame() function with every tick of its clock.
+//  Ideally its clock ticks 60 frames per second.
+
+var onFrame = function( event ){
+
+
+	//  onFrame() is passed an argument called 'event'.
+	//  This event{} object contains three properties:
+	//  'count' is the current frame number,
+	//  'time' is the current time elapsed in seconds, and
+	//  'delta' is the time since the last frame was rendered.
+	
+	//console.log( 'Frame number: '+ event.count )
+
+
+	//  Notice how the rotate() function is relative, not absolute!
+	//  ie. We're not setting the degree of rotation to 1 or -1
+	//  but instead we're adding +1 or -1 to whatever the existing
+	//  state of rotation is.
+	
+	square1.rotate(  1 )
+	square2.rotate( -1 )
+
+
+	//  Using PaperScript we can add to our current position in a few ways.
+	//  The "proper way" is probably to create a new Point like this:
+
+	square3.position += new Point( 1, - 1 )
+
+
+	//  But because Paper is flexible we can just use a two-dimensional
+	//  array instead like this if we wanted to and it would be the same:
+	//  square3.position += [ 1, -1 ]
+
+
+	//  Now we'll get fancy:
+	//  We'll just change square4's position by one unit on the X-axis,
+	//  but then have some fun on the Y-axis
+	//  using some math methods created by Skip.js.
+	//  Might as well rotate it too!
+	
+	square4.position.x -= 4
+	square4.position.y = view.bounds.height - square4.position.x.normalize( 0, view.bounds.width ).multiply( PI ).sine().multiply( 300 )
+	square4.rotate( 2 )
+}
+
+		</script>
+	</body>
+</html>
