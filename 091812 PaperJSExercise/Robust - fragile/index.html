@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/base.css" />
+		<title>VisualizingJS - Robust - Fragile</title>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="600" height="600"></canvas>
+		<script charset="utf-8" src="scripts/paper.js"></script>
+		<script charset="utf-8" src="scripts/skip.js"></script>
+		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
+
+var squares=[];
+var group=new Group();
+	
+var squareside = 60;
+var offset = 10;
+var gravity=3;
+
+
+var square1 = new Path.Rectangle(view.size.width/4+offset+offset/2,squareside/4,squareside,squareside);
+    square1.fillColor = 'white';
+    square1.selected=true;
+    // square1.position.y -=20;
+    // console.log("square1s position is "+ square1.position);
+
+var square2 = square1.clone();
+    square2.position.x+=squareside+offset;
+    // square2.selected=true;
+
+var square3 = square2.clone();
+    square3.position.x+=squareside+offset;
+    // square3.selected=true;
+    
+var square4 = square3.clone();
+    square4.position.x+=squareside+offset;
+    // square4.selected=true;
+
+var timeText = new PointText(view.center);
+    timeText.paragraphStyle.justification = 'center';
+    timeText.characterStyle.fontSize = 20;
+    timeText.fillColor = 'gray';
+    timeText.position=view.size/2;
+
+var frameCountText = timeText.clone();
+    frameCountText.position.y+=30;
+    frameCountText.fillColor = 'white';
+
+    
+var destination1;
+var destination2;
+var destination3;
+var destination4;
+var vector1;
+var vector2;
+var vector3;
+var vector4;
+
+var theta=90;
+var angle = function(){
+            var increment=180;
+            theta+=increment;
+            return theta;
+        }
+
+var walk = function(item, event, direction){
+        var passedEvent = event;
+        var dir=direction;
+            item.position += new Point(5*dir,0 );
+            item.rotate(Math.sin(theta)*10*dir);
+        }   
+        
+var moveUp = function(item,event){
+        var passedEvent = event;
+        if(event.count%5===0){
+        item.position.y += 10;
+        }  
+}
+
+var moveDown = function(item,event){
+        var passedEvent = event;
+        if(event.count%5===0){
+        item.position.y -= 10;    
+    }
+}
+
+var moveRight = function(item,event){
+        var passedEvent = event;
+        if(event.count%5===0){
+        item.position.x += 30;
+        }  
+}
+
+var moveLeft = function(item,event){
+        var passedEvent = event;
+        if(event.count%5===0){
+        item.position.x -= 30;    
+    }
+}
+
+var cruise = function(item, event, vector, destination,speed){
+        var passedEvent = event;
+        var movVector=vector;
+        var div=speed
+        var finalDestination=destination;
+        item.position += movVector/div;
+        var arrived=false
+}
+
+
+var onFrame = function(event){
+        timeText.content = Math.round(event.time) + " seconds";
+        // frameCountText.content = Math.round(event.count) + " frames";
+        frameCountText.content = view.size.width;
+        angle();
+        // //ENTRANCE AND ADJUST
+        
+        if(event.time<10){
+            
+        }
+                        
+};
+		</script>
+	</body>
+</html>
