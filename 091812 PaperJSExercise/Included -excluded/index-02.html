@@ -36,6 +36,12 @@ var square4 = new Path.Rectangle(square3.bounds.bottomLeft-squareside,squareside
     square4.position.x -=10;
     // square4.selected=true
 
+var square5 = new Path.Rectangle(square3.bounds.bottomLeft-squareside,squareside);
+    square5.fillColor = 'white';
+    square5.position.x -=10;
+    // square4.selected=true
+    square5.opacity = 0;
+
 
 var timeText = new PointText(view.center);
     timeText.paragraphStyle.justification = 'center';
@@ -121,45 +127,36 @@ var onFrame = function(event){
         // frameCountText.content = Math.round(event.count);
         
         angle();
-        //ENTRANCE AND ADJUST
-        if (event.time<6 && event.count%5===0){
-            if (square1.position.x < view.size.width/2){
-            walk(square1, event, 1);}
-            if (square2.position.x <= view.size.width/2-squareside*.85){
-            walk(square2, event, 1);
-            // console.log("square2s position is "+ square2.bounds.bottomLeft.x);
-             }            
-            if (square3.position.x <= view.size.width/2-squareside*2*.85){
-            walk(square3, event, 1);}
-            if (square4.position.x <= view.size.width/2-squareside*3*.85){
-            walk(square4, event, 1);}               
-        }
+        // //ENTRANCE AND ADJUST
+            if (event.time<6 && event.time<15 && square1.position.x < view.size.width/2 && event.count%5===0){
+                walk(square1, event, 1)}
+            
+            if (event.time<6 && square2.position.x <= view.size.width/2-squareside*.65 && event.count%5===0){
+                        walk(square2,event,1)} 
+             else if (event.time>6 && event.time<15 && square2.position.x> square1.bounds.bottomLeft.x-10-squareside/2 && event.count%5===0){
+            //         //square2 reverse
+            //             if (square2.position.x> square1.bounds.bottomLeft.x-10-squareside/2 && square2.position.x <500 ){
+                        walk(square2, event, -1); 
+                      square2.rotate(Math.sin(theta)*10);     }
+            
+            if (event.time<6.5 && event.time<15 && square3.position.x <= view.size.width/2-squareside*2*.85 && event.count%5===0){
+                        walk(square3,event,1)}
+                        
+            else if (event.time>6 && event.time<15 && square3.position.x> square2.bounds.bottomLeft.x-10-squareside/2 && event.count%5===0){
+                      //square3reverse
+                          
+                          walk(square3, event, -1);
+                          square3.rotate(Math.sin(theta)*40);            
+                          }     
+                 
+           if (event.time<6.5 && event.time<7 && square4.position.x <= view.size.width/2-squareside*3*.85 && event.count%5===0){
+               walk(square4,event,1)}
+        
+           else if (event.time>7 && event.time<8.15 && square4.position.x> square4.bounds.bottomLeft.x-10-squareside/2 && event.count%5===0){
+                     //square4reverse
+                    walk(square4, event, -1);
+                         }
 
-        else if (event.time<7 && event.count%5===0){
-            //square2 reverse
-                if (square2.position.x> square1.bounds.bottomLeft.x-10-squareside/2 && square2.position.x <500 ){
-                walk(square2, event, -1);
-                square2.rotate(Math.sin(theta)*10);
-                if (square4.position.x <= view.size.width/2-squareside*3*.85){
-                walk(square4, event, 1);}
-                }
-        else if (event.time<9 && event.count%5===0){
-            //square3reverse
-            if (square3.position.x> square2.bounds.bottomLeft.x-10-squareside/2 && square3.position.x <500 )
-                {
-                walk(square3, event, -1);
-                square3.rotate(Math.sin(theta)*10);            
-                }
-        else if (event.time<13 && event.count%5===0){
-            //square4reverse
-            if (square4.position.x> square3.bounds.bottomLeft.x-squareside*30 && square4.position.x <500 )
-                {
-                walk(square4, event, -1);
-                // square4.rotate(Math.sin(theta)*10.125);            
-                }
-        }         
-        }
-        }
         
         //ANGER PASSING
         if (event.time>8 && event.time<10 && event.count%2==0)
@@ -234,8 +231,8 @@ var onFrame = function(event){
           if (square4.position.x < view.size.width/2 && event.count%2==0){
           walk(square4, event, 1);}
         }   
-     if (event.time>34 && event.time<38 && event.count%5===0){
-          if (square4.position.x < view.size.width/2 && event.count%2==0){
+     if (event.time>34 && event.time<37 && event.count%5===0){
+          if (square4.position.x < view.size.width/2-20 && event.count%2==0){
           walk(square4, event, -1);}
         }
      if (event.time>38 && event.time<40 && event.count%2==0){moveUp(square4,event);}
@@ -247,13 +244,12 @@ var onFrame = function(event){
           destination4=new Point(view.size.width-squareside*3, view.size.height-squareside/2);
           vector4 = destination4 - square4.position;
           cruise(square4,event,vector4,destination4,300)
-          square4.rotate(3.5);     
+          square4.rotate(6);     
      }    
           // if(event.time>42 && event.time<48 &&event.count%120==0){
           // square4.scale(1.15)}
-      // if(event.time>39 && event.time<47 && event.count%120==0){
-      //       square4.scale(.15)}
-      
+
+            
       if (event.time>45 && event.time<49){
           destination1=new Point(Math.floor((Math.random()*100)+1), Math.floor((Math.random()*1200)+1));
           destination2=new Point(Math.floor((Math.random()*200)+1), Math.floor((Math.random()*1000)+1));
@@ -266,16 +262,16 @@ var onFrame = function(event){
           cruise(square3,event,vector3,destination3,10);
       }
       
-      if (event.time>48 && event.time<60 && event.count%120==0){
+      if (event.time>43 && event.time<50 && event.count%120==0){
           destination4=new Point(view.width/2-squareside, view.width/2-squareside)
            vector4 = destination4 - square4.position;
            cruise(square4,event,vector4,destination4,10)
-           // square4.scale(.95)
            } 
            
-     // if(square4.position==destination4){}
+       if(event.time>42 && event.time<45){
+                  square4.scale(.99)}
      
-      if (event.time>51 && event.time<60){
+      if (event.time>49 && event.time<60){
            destination1=view.center-(squareside/2+10);
            destination2=new Point(square1.position.x+(squareside+20), square1.position.y);
            destination3=new Point(square1.position.x-5, square1.position.y+(squareside+10));
@@ -287,7 +283,11 @@ var onFrame = function(event){
            cruise(square3,event,vector3,destination3,100);
        }
 
-            
+        if(event.time>48 && event.time<60){
+            square5.position=view.center+squareside/2;
+            square5.opacity+=.0125; 
+                                 }
+                        
 };
 		</script>
 	</body>
