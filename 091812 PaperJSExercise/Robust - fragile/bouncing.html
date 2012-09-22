@@ -11,10 +11,10 @@
 		<script charset="utf-8" src="scripts/skip.js"></script>
 		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
 
-
+        var squareside = 60
         var squares=[];
         var group = new Group();
-
+        
         var square = Base.extend({
             initialize: function(point, vector) {
                 if (!vector || vector.isZero()) {
@@ -26,41 +26,26 @@
                 this.dampen = 0.4;
                 this.gravity = 3;
                 this.bounce = -0.6;
-                this.radius = 50 * Math.random() + 30;
                 this.createPaths();
                 group.addChild(this.item);
             },
 
             createPaths: function() {
                 var overlayPos = this.point + this.radius / 8;
-                var compound = new CompoundPath([
-                    new Path.Circle(this.point, this.radius),
-                    new Path.Circle(overlayPos, this.radius / 2)
-                ]);
-                var color = new HsbColor(Math.random() * 360, 1, 1);
-                var gradient = new Gradient([color, 'black'], 'radial');
-                compound.children[0].fillColor = new GradientColor(gradient, this.point,
-                        this.point + this.radius, overlayPos);
-                var overlay = new Path.Circle(overlayPos, this.radius / 2);
-                var overlayColor = color.clone();
-                var fullOverlay = color.clone();
-                overlayColor.alpha = 0.5;
-                var overlayGradient = new Gradient([new RgbColor(1, 1, 1, 0.5), new RgbColor(1, 1, 1, 1)]);
-                overlay.fillColor = new GradientColor(overlayGradient, overlayPos, overlayPos + this.radius / 2);
-                this.item = new Group([compound, overlay]);
+                var rect = new Path.Rectangle(this.point, squareside);
             },
 
             iterate: function() {
-                var size = view.size;
+                // var size = view.size;
                 this.vector.y += this.gravity;
-                this.vector.x *= 0.99;
+                // this.vector.x *= 0.99;
                 var pre = this.point + this.vector;
                 if (pre.x < this.radius || pre.x > size.width - this.radius)
                     this.vector.x *= -this.dampen; 
-                if (pre.y < this.radius || pre.y > size.height - this.radius) {
-                    if (Math.abs(this.vector.x) < 3)
-                        this.vector = Point.random() * [150, 100] + [-75, 20];
-                    this.vector.y *= this.bounce;
+                // if (pre.y < this.radius || pre.y > size.height - this.radius) {
+                //     if (Math.abs(this.vector.x) < 3)
+                //         this.vector = Point.random() * [150, 100] + [-75, 20];
+                //     this.vector.y *= this.bounce;
                 }
 
                 var max = Point.max(this.radius, this.point + this.vector);
