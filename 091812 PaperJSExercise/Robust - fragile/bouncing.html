@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="styles/base.css" />
-		<title>VisualizingJS - Robust - Fragile</title>
+		<title>VisualizingJS -Bounce ref</title>
 	</head>
 	<body>
 		<canvas id="myCanvas" width="600" height="600"></canvas>
@@ -11,11 +11,10 @@
 		<script charset="utf-8" src="scripts/skip.js"></script>
 		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
 
-        var squareside = 60
-        var squares=[];
+        var balls = [];
         var group = new Group();
-        
-        var square = Base.extend({
+
+        var Ball = Base.extend({
             initialize: function(point, vector) {
                 if (!vector || vector.isZero()) {
                     this.vector = Point.random() * 5;
@@ -26,26 +25,28 @@
                 this.dampen = 0.4;
                 this.gravity = 3;
                 this.bounce = -0.6;
+                this.radius = 50 * Math.random() + 30;
                 this.createPaths();
                 group.addChild(this.item);
             },
 
             createPaths: function() {
                 var overlayPos = this.point + this.radius / 8;
-                var rect = new Path.Rectangle(this.point, squareside);
+                var compound = new Path.Circle(this.point, this.radius);
+                var color = new HsbColor(Math.random() * 360, 1, 1);
             },
 
             iterate: function() {
-                // var size = view.size;
+                var size = view.size;
                 this.vector.y += this.gravity;
-                // this.vector.x *= 0.99;
+                this.vector.x *= 1;
                 var pre = this.point + this.vector;
                 if (pre.x < this.radius || pre.x > size.width - this.radius)
                     this.vector.x *= -this.dampen; 
-                // if (pre.y < this.radius || pre.y > size.height - this.radius) {
-                //     if (Math.abs(this.vector.x) < 3)
-                //         this.vector = Point.random() * [150, 100] + [-75, 20];
-                //     this.vector.y *= this.bounce;
+                if (pre.y < this.radius || pre.y > size.height - this.radius) {
+                    if (Math.abs(this.vector.x) < 3)
+                        this.vector = Point.random() * [150, 100] + [-75, 20];
+                    this.vector.y *= this.bounce;
                 }
 
                 var max = Point.max(this.radius, this.point + this.vector);
@@ -61,37 +62,13 @@
             balls.push(ball);
         }
 
-        var textItem = new PointText(20, 30);
-        textItem.fillColor = 'black';
-        textItem.content = 'Click, drag and release to add balls.'
-
-        var lastDelta;
-        function onMouseDrag(event) {
-            lastDelta = event.delta;
-        }
-
-        function onMouseUp(event) {
-            var ball = new Ball(event.point, lastDelta);
-            balls.push(ball);
-            lastDelta = null;
-        }
+     
+        
 
         function onFrame() {
             for (var i = 0, l = balls.length; i < l; i++)
                 balls[i].iterate();
         }
-
-		
-var onFrame = function(event){
-        timeText.content = Math.round(event.time) + " seconds";
-        // frameCountText.content = Math.round(event.count) + " frames";
-        frameCountText.content = view.size.width;
-
-
-
-
-
-};
-		</script>
+        </script>
 	</body>
 </html>		

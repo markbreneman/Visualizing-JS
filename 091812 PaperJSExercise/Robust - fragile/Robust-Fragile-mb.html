@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/base.css" />
+		<title>VisualizingJS - Robust - Fragile -mark breneman</title>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="600" height="600"></canvas>
+		<script charset="utf-8" src="scripts/paper.js"></script>
+		<script charset="utf-8" src="scripts/skip.js"></script>
+		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
+
+//SETTING UP THE SCENE:THIS IS NOT NECESSARY...JUST A STEWART CONVENTION
+var background = new Path.Rectangle( view.center, view.bounds.width )
+background.fillColor = 'black'
+background.position = view.center
+project.activeLayer.insertChild( 0, background )
+
+//CREATE TIMING TEXT FOR SETUP
+var durationSeconds = 60
+var running = true
+
+var timeText = new PointText(view.center);
+    timeText.paragraphStyle.justification = 'center';
+    timeText.characterStyle.fontSize = 20;
+    timeText.fillColor = 'gray';
+    timeText.position=view.size/2;
+
+var frameCountText = timeText.clone();
+    frameCountText.position.y+=30;
+    frameCountText.fillColor = 'white';
+    
+
+//CREATE CHARACTERS
+var squareSide=60;
+var offset = 10;
+var squares = [];//An Array to Hold Characters
+var rectStartPoint= new Point(165,offset+squareSide)//First Corner of First Square
+var rectSize = new Size(squareSide,squareSide)//Set the size of the Squares
+
+for(var i = 0; i<4; i++){
+     var placementX=rectStartPoint.x+i*squareSide*(1+1/6)+offset;//Set the X-Position as a function of the for Loop
+     var placementPoint= new Point(placementX,offset);//Bring in that X-Position
+     var square = new Path.Rectangle(placementPoint,rectSize);
+     square.fillColor = 'white';//Set the Fill Color
+     square.destination = new Point(placementX+squareSide/2, view.size.height-squareSide/2-offset);
+     squares.push(square);//Add the newly created squares to the array
+ }
+
+//SETTING UP A ROTATION PROPERTY FOR PATH OBJECTS SO THAT WE CAN KNOW WHERE OBJECTS ARE IN ROTATION
+//CREATE A ROTATION ANGLE PROPERTY ASSOCIATED WITH PATHS
+//CREATE A FUNCTION(CALLED LOGGED ROTATE) WHICH INCREASE THE ANGLE AND KEEPS TRACK BY INCREMENTING 
+//THE ROTATION ANGLE PROPERTY
+ Path.prototype.rotationAngle = 0
+ Path.prototype.loggedRotate = function( changeInRotation ){
+
+ 	this.rotationAngle += changeInRotation
+ 	this.rotate( changeInRotation )
+ }
+
+
+var gravity=3;
+    
+var destination1;
+var destination2;
+var destination3;
+var destination4;
+var vector1;
+var vector2;
+var vector3;
+var vector4;
+
+
+
+var theta=90;
+var angle = function(){
+            var increment=180;
+            theta+=increment;
+            return theta;
+        }
+
+var onFrame = function(event){
+    
+                //KEEPING TRACK OF TIME    
+                if( event.time > durationSeconds && running === true ){
+        
+         running = false
+         squares[0].remove()
+         squares[1].remove()
+         squares[2].remove()
+         squares[3].remove()
+         background.remove()
+         document.title = 'Paper finished.'
+        }
+        
+        else if( running === true ) {
+        
+         document.title = 'Animation at '+ event.time.floor().toPaddedString( 2 ) +' seconds.'
+        }    
+        timeText.content = Math.round(event.time) + " seconds";
+        frameCountText.content = Math.round(event.count) + " frames";
+        // frameCountText.content = view.size.height;
+        // frameCountText.content = squares[0].destination;
+                        
+                
+        for(i=0; i<squares.length; i++) {            
+                               var vector = squares[i].destination - squares[i].position
+                               squares[i].position += vector / 30//This is an easing 
+                           //     if( vector.length < 5 ){
+                           // squares[i].position = squares[i].destination
+                                // }
+               }        
+                        
+};
+		</script>
+	</body>
+</html>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Included - excluded/index.html</string>
+	<string>Robust - Fragile/Robust-Fragile-mb.html</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,6 +13,8 @@
 			<string>091812 PaperJSExercise</string>
 			<key>regexFolderFilter</key>
 			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
+			<key>selected</key>
+			<true/>
 			<key>sourceDirectory</key>
 			<string></string>
 		</dict>
@@ -21,86 +23,86 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>Included - excluded/index.html</key>
+		<key>Included - Excluded/Include-Exclude-mb.html</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>56</integer>
-				<key>line</key>
-				<integer>267</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>252</integer>
-		</dict>
-		<key>Robust - fragile/bouncing.html</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>30</integer>
-				<key>line</key>
 				<integer>59</integer>
+				<key>line</key>
+				<integer>5</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>6</integer>
+			<integer>0</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>27</integer>
+				<integer>9</integer>
 				<key>line</key>
-				<integer>59</integer>
+				<integer>5</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>31</integer>
-				<key>line</key>
 				<integer>59</integer>
+				<key>line</key>
+				<integer>5</integer>
 			</dict>
 		</dict>
-		<key>Robust - fragile/index.html</key>
+		<key>Robust - Fragile/Robust-Fragile-mb.html</key>
 		<dict>
 			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>7</integer>
-				<key>line</key>
-				<integer>125</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>85</integer>
-			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>111</integer>
+				<integer>56</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>42</integer>
+		</dict>
+		<key>Robust - Fragile/bouncing.html</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>15</integer>
+				<key>line</key>
+				<integer>44</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>4</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>51</integer>
+				<key>line</key>
+				<integer>44</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>7</integer>
+				<integer>15</integer>
 				<key>line</key>
-				<integer>125</integer>
+				<integer>44</integer>
 			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>Robust - fragile/index.html</string>
-		<string>Robust - fragile/bouncing.html</string>
-		<string>Included - excluded/index.html</string>
+		<string>Robust - Fragile/Robust-Fragile-mb.html</string>
+		<string>Included - Excluded/Include-Exclude-mb.html</string>
+		<string>Robust - Fragile/bouncing.html</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
@@ -114,14 +116,7 @@
 			<true/>
 			<key>subItems</key>
 			<dict>
-				<key>Included - excluded</key>
-				<dict>
-					<key>isExpanded</key>
-					<true/>
-					<key>subItems</key>
-					<dict/>
-				</dict>
-				<key>Robust - fragile</key>
+				<key>Included - Excluded</key>
 				<dict>
 					<key>isExpanded</key>
 					<true/>
@@ -132,6 +127,6 @@
 		</dict>
 	</dict>
 	<key>windowFrame</key>
-	<string>{{10, 92}, {1327, 761}}</string>
+	<string>{{81, 87}, {1327, 761}}</string>
 </dict>
 </plist>
