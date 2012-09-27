@@ -10,6 +10,34 @@
 		<script charset="utf-8" src="scripts/paper.js"></script>
 		<script charset="utf-8" src="scripts/skip.js"></script>
 		<script charset="utf-8" type="text/paperscript" canvas="myCanvas">
+
+
+
+//SETTING UP THE SCENE:THIS IS NOT NECESSARY...JUST A STEWART CONVENTION
+var background = new Path.Rectangle( view.center, view.bounds.width )
+background.fillColor = 'black'
+background.position = view.center
+project.activeLayer.insertChild( 0, background )
+
+//CREATE TIMING TEXT FOR SETUP
+var durationSeconds = 60
+var running = true
+
+var timeText = new PointText(view.center);
+    timeText.paragraphStyle.justification = 'center';
+    timeText.characterStyle.fontSize = 20;
+    timeText.fillColor = 'gray';
+    timeText.position=view.size/2;
+
+var frameCountText = timeText.clone();
+    frameCountText.position.y+=30;
+    frameCountText.fillColor = 'white';
+
+var DiagnosticText = timeText.clone();
+        DiagnosticText.position.y+=60;
+        DiagnosticText.fillColor = 'red';
+
+
 	
 var squareside=60;
 
@@ -43,19 +71,7 @@ var square5 = new Path.Rectangle(square3.bounds.bottomLeft-squareside,squareside
     square5.opacity = 0;
 
 
-var timeText = new PointText(view.center);
-    timeText.paragraphStyle.justification = 'center';
-    timeText.characterStyle.fontSize = 20;
-    timeText.fillColor = 'gray';
-    timeText.position=view.size/2;
 
-var frameCountText = timeText.clone();
-    frameCountText.position=view.size/1.75;
-    frameCountText.fillColor = 'white';
-
-var excludedText = timeText.clone();
-    excludedText.characterStyle.fontSize = 20;
-    excludedText.position=view.center;
     
 var destination1;
 var destination2;
@@ -129,6 +145,29 @@ var cruise = function(item, event, vector, destination,speed){
 var onFrame = function(event){
         // timeText.content = Math.round(event.time);
         // frameCountText.content = Math.round(event.count);
+        
+        
+        //KEEPING TRACK OF TIME    
+            if( event.time > durationSeconds && running === true ){
+
+             running = false
+             square1.remove()
+             square2.remove()
+             square3.remove()
+             square5.remove()
+             background.remove()
+             // document.title = 'Paper finished.'
+            }
+
+            // else if( running === true ) {
+            //         
+            //          document.title = 'Animation at '+ event.time.floor().toPaddedString( 2 ) +' seconds.'
+            //         }    
+            // timeText.content = Math.round(event.time) + " seconds";
+            //         frameCountText.content = Math.round(event.count) + " frames";
+
+            // DiagnosticText.content = ;        
+    
         
         angle();
         // //ENTRANCE AND ADJUST
@@ -282,9 +321,9 @@ var onFrame = function(event){
            vector1 = destination1 - square1.position;
            vector2 = destination2 - square2.position;
            vector3 = destination3 - square3.position;
-           cruise(square1,event,vector1,destination1,100);
-           cruise(square2,event,vector2,destination2,100);
-           cruise(square3,event,vector3,destination3,100);
+           cruise(square1,event,vector1,destination1,70);
+           cruise(square2,event,vector2,destination2,70);
+           cruise(square3,event,vector3,destination3,70);
        }
 
         if(event.time>48 && event.time<60){
