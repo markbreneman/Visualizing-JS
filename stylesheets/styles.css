@@ -217,12 +217,22 @@ footer {
     top:52px;
   }
 
-canvas
+#canvas
 {
 	position: absolute;
-	top:  50%;
-	left: 50%;
-	margin: -270px 0 0 -480px;
+/*	top:  50%;
+	left: 50%;*/
+/*	margin: -270px 0 0 -480px;*/
+	width:  600px;
+	height: 600px;
+	background-color: #000;
+}
+#canvas2
+{
+	position: absolute;
+/*	top:  50%;
+	left: 50%;*/
+/*	margin: -270px 0 0 -480px;*/
 	width:  600px;
 	height: 600px;
 	background-color: #000;
