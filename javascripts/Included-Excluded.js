@@ -22,7 +22,7 @@ var frameCountText = timeText.clone();
 
 var DiagnosticText = timeText.clone();
         DiagnosticText.position.y+=60;
-        DiagnosticText.fillColor = 'red';
+        DiagnosticText.fillColor = 'whites';
 
 
 	
@@ -316,6 +316,13 @@ var onFrame = function(event){
         if(event.time>48 && event.time<60){
             square5.position=view.center+squareside/2;
             square5.opacity+=.0125; 
+			
                                  }
+
+		if(event.time>60){
+		            DiagnosticText.content ="Fin." ;  
+                                 }
+
+
                         
 };
