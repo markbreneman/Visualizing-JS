@@ -217,7 +217,7 @@ if( demoNumber === 4 ){
 	for(var i=0; i<8; i++){
 	
 		addCube({ 
-			x: -150	, 
+			x: -250	, 
 			y:  -160+40*i, 
 			z:   -200, 
 			size: 35})
@@ -227,27 +227,27 @@ if( demoNumber === 4 ){
 	for(var j=0; j<4; j++){
 		if (j==1){
 			addCube({ 
-				x: -140+30*j, 
+				x: -240+30*j, 
 				y: 40*j,
 				z:  -200, 
 				size: 35})	
 		}
 		
 		else(addCube({ 
-			x: -150+30*j, 
+			x: -250+30*j, 
 			y: 40*j,
 			z:  -200, 
 			size: 35}))	
 	}
 	
 	addCube({ 
-			x:  -20,  
+			x:  -120,  
 			y:  120, 
 			z:   -200, 
 			size: 35})
 	
 	addCube({ 
-			x:  20,  
+			x:  -80,  
 			y:  120, 
 			z:   -200, 
 			size: 35})
@@ -255,14 +255,14 @@ if( demoNumber === 4 ){
 	for(var l=0; l<3; l++){
 		if (l==1){
 			addCube({ 
-				x: 20+30*l, 
+				x: -80+30*l, 
 				y: 120-40*l,
 				z:  -200, 
 				size: 35})	
 		}
 	
 		else(addCube({ 
-			x: 20+30*l, 
+			x: -80+30*l, 
 			y:  120-40*l,
 			z:  -200, 
 			size: 35}))
@@ -271,27 +271,27 @@ if( demoNumber === 4 ){
 	for(var m=0; m<4; m++){
 		if (m==1){
 			addCube({ 
-				x: 110+30*m, 
+				x: 10+30*m, 
 				y: 40*m,
 				z:  -200, 
 				size: 35})	
 		}
 		
 		else(addCube({ 
-			x: 110+30*m, 
+			x: 10+30*m, 
 			y: 40*m,
 			z:  -200, 
 			size: 35}))	
 	}
 	
 	addCube({ 
-			x:  240,  
+			x:  140,  
 			y:  120, 
 			z:   -200, 
 			size: 35})
 	
 	addCube({ 
-			x:  280,  
+			x:  180,  
 			y:  120, 
 			z:   -200, 
 			size: 35})
@@ -299,14 +299,14 @@ if( demoNumber === 4 ){
 	for(var n=0; n<3; n++){
 		if (n==1){
 			addCube({ 
-				x: 280+30*n, 
+				x: 180+30*n, 
 				y: 120-40*n,
 				z:  -200, 
 				size: 35})	
 		}
 
 		else(addCube({ 
-			x: 280+30*n, 
+			x: 180+30*n, 
 			y:  120-40*n,
 			z:  -200, 
 			size: 35}))
@@ -315,12 +315,13 @@ if( demoNumber === 4 ){
 	for(var i=0; i<5; i++){
 	
 		addCube({ 
-			x: 340	, 
+			x: 240	, 
 			y:  -160+40*i, 
 			z:   -200, 
 			size: 35})
 			}
 }
+
 
 
 
