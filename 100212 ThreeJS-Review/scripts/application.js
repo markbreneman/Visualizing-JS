@@ -370,12 +370,12 @@ function setupThree(){
 	//  that will define the dimensions of our Camera's view.
 	
 	var
-	WIDTH      = 960,
-	HEIGHT     = 540,
+	WIDTH      = 600,
+	HEIGHT     = 353,
 	VIEW_ANGLE = 45,
 	ASPECT     = WIDTH / HEIGHT,
 	NEAR       = 0.1,
-	FAR        = 10000
+	FAR        = 1000
 	
 	window.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR )
 	camera.position.set( 0, 0, 300 )
