@@ -17,7 +17,7 @@ addLights()
 //  Hold down 'S' and move your mouse up or down to zoom.
 //  Hold down 'D' and move your mouse around to pan.
 
-addControls()
+// addControls()
 
 
 
@@ -397,22 +397,22 @@ function setupThree(){
 
 
 
-// function addControls(){
-// 
-// 	window.controls = new THREE.TrackballControls( camera )
-// 
-// 	controls.rotateSpeed = 1.0
-// 	controls.zoomSpeed   = 1.2
-// 	controls.panSpeed    = 0.8
-// 
-// 	controls.noZoom = false
-// 	controls.noPan  = false
-// 	controls.staticMoving = true
-// 	controls.dynamicDampingFactor = 0.3
-// 	controls.keys = [ 65, 83, 68 ]//  A, S, D
-// 
-// 	controls.addEventListener( 'change', render )
-// }
+function addControls(){
+
+	window.controls = new THREE.TrackballControls( camera )
+
+	controls.rotateSpeed = 1.0
+	controls.zoomSpeed   = 1.2
+	controls.panSpeed    = 0.8
+
+	controls.noZoom = false
+	controls.noPan  = false
+	controls.staticMoving = true
+	controls.dynamicDampingFactor = 0.3
+	controls.keys = [ 65, 83, 68 ]//  A, S, D
+
+	controls.addEventListener( 'change', render )
+}
 
 
 
