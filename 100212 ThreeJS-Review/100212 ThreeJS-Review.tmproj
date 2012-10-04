@@ -8,7 +8,7 @@
 			<key>expanded</key>
 			<true/>
 			<key>name</key>
-			<string>091812 PaperJSExercise</string>
+			<string>100212 ThreeJS-Review</string>
 			<key>regexFolderFilter</key>
 			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
 			<key>sourceDirectory</key>
@@ -25,35 +25,13 @@
 	<true/>
 	<key>treeState</key>
 	<dict>
-		<key>091812 PaperJSExercise</key>
+		<key>100212 ThreeJS-Review</key>
 		<dict>
 			<key>isExpanded</key>
 			<true/>
 			<key>subItems</key>
 			<dict>
-				<key>Included - Excluded</key>
-				<dict>
-					<key>isExpanded</key>
-					<true/>
-					<key>subItems</key>
-					<dict>
-						<key>scripts</key>
-						<dict>
-							<key>isExpanded</key>
-							<true/>
-							<key>subItems</key>
-							<dict/>
-						</dict>
-						<key>styles</key>
-						<dict>
-							<key>isExpanded</key>
-							<true/>
-							<key>subItems</key>
-							<dict/>
-						</dict>
-					</dict>
-				</dict>
-				<key>Robust - Fragile</key>
+				<key>scripts</key>
 				<dict>
 					<key>isExpanded</key>
 					<true/>
@@ -64,6 +42,6 @@
 		</dict>
 	</dict>
 	<key>windowFrame</key>
-	<string>{{-0, 55}, {776, 823}}</string>
+	<string>{{203, 55}, {1227, 818}}</string>
 </dict>
 </plist>
