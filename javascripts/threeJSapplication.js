@@ -377,7 +377,7 @@ function setupThree(){
 	NEAR       = 0.1,
 	FAR        = 1000
 	
-	canvas.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR )
+	window.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR )
 	camera.position.set( 0, 0, 300 )
 	camera.lookAt( scene.position )
 	scene.add( camera )
