@@ -399,9 +399,9 @@ function setupThree(){
 
 function addControls(){
 
-	var canvas=document.getElementById( 'three' )
+	// var canvas=document.getElementById( 'three' )
 
-	canvas.controls = new THREE.TrackballControls( camera )
+	window.controls = new THREE.TrackballControls( camera )
 
 	controls.rotateSpeed = 1.0
 	controls.zoomSpeed   = 1.2
