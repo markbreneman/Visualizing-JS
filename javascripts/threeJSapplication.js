@@ -399,7 +399,7 @@ function setupThree(){
 
 function addControls(){
 
-	canvas=document.getElementById( 'three' )
+	var canvas=document.getElementById( 'three' )
 
 	canvas.controls = new THREE.TrackballControls( camera )
 
