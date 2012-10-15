@@ -1,7 +1,4 @@
 
-
-
-
 //  Now that we've included jQuery we can use its syntax for determining if
 //  the full HTML page has been loaded. Waiting for the document to be ready
 //  helps us avoid strange errors--because if our document is ready that means
@@ -62,7 +59,7 @@ $( document ).ready( function(){
 	earth.position.set( 0, 0, 0 )
 	earth.receiveShadow = true
 	earth.castShadow = true
-	// group.add( earth )
+	group.add( earth )
 
 
 	//  But what's Earth without a few clouds? Note here how we handle 
@@ -86,13 +83,8 @@ $( document ).ready( function(){
 	clouds.position.set( 0, 0, 0 )
 	clouds.receiveShadow = true
 	clouds.castShadow = true
-	// group.add( clouds )
-
-
-
+	group.add( clouds )	
 	
-
-
 	//  Working with latitude and longitude can be tricky at first
 	//  because it feels like X and Y have been swapped
 	//  and you also have to remember South and West are negative!
@@ -105,48 +97,9 @@ $( document ).ready( function(){
 	//  http://en.wikipedia.org/wiki/Longitude
 	//  http://en.wikipedia.org/wiki/Latitude
 
-
-	// group.add( dropPin(//  Red is the North Pole -----------------------------
-	// 
-	// 	90,
-	// 	 0,
-	// 	0xFF0000
-	// ))
-	// 
-	// 
-	// group.add( dropPin(//  Green is the South Pole --------------------------- 
-	// 
-	// 	-90, 
-	// 	  0, 
-	// 	0x00FF00
-	// ))
-	// 
-	// 
-	// group.add( dropPin(//  Purple is the fictional Island of Null ------------
-	// 
-	// 	0, 
-	// 	0, 
-	// 	0xFF00FF
-	// ))
-	// 
-	// 
-	// group.add( dropPin(//  Yellow is New York City ---------------------------
-	// 
-	// 	 42.3482, 
-	// 	-75.1890, 
-	// 	 0xFFFF00
-	// ))
-	// 
-	// 
-	// group.add( dropPin(//  Blue is Paris -------------------------------------
-	// 
-	// 	48.8742, 
-	// 	 2.3470, 
-	// 	0x00CCFF
-	// ))
-	// 
 	
 	//Marks Points
+	
 	
 	
 	group.add( dropPin(//  Nice, France -------------------------------------
@@ -183,13 +136,6 @@ $( document ).ready( function(){
 		28.9744, 
 		0xFF372F
 	))
-		
-	
-	var object1 = new Collada('THEMIS',1);
-	
-	group.add( object1 );
-
-
 
 
 	//  Finally, we add our group of objects to the Scene.
@@ -210,8 +156,6 @@ $( document ).ready( function(){
 
 	loop()	
 })
-
-
 
 
 function loop(){
@@ -269,8 +213,6 @@ function dropPin( latitude, longitude, color ){
 }
 
 
-
-
 //  Why separate this simple line of code from the loop() function?
 //  So that our controls can also call it separately.
 
@@ -280,28 +222,24 @@ function render(){
 }
 
 
-
-
 //  I'll leave this in for the moment for reference, but it seems to be
 //  having some issues ...
 
-function surfacePlot( params ){
+// function surfacePlot( params ){
 
-	params = cascade( params, {} )
-	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
-	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
-	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
-	params.radius    = cascade( params.radius, 60 )
+// 	params = cascade( params, {} )
+// 	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
+// 	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
+// 	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
+// 	params.radius    = cascade( params.radius, 60 )
 
-	var
-	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
-	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
-	z = params.center.z + params.latitude.sine()   * params.radius
+// 	var
+// 	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
+// 	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
+// 	z = params.center.z + params.latitude.sine()   * params.radius
 
-	return new THREE.Vector3( x, y, z )
-}
-
-
+// 	return new THREE.Vector3( x, y, z )
+// }
 
 
 function setupThree(){
@@ -376,7 +314,7 @@ function addControls(){
 	controls.dynamicDampingFactor = 0.3
 	controls.keys = [ 65, 83, 68 ]//  ASCII values for A, S, and D
 
-	controls.addEventListener( 'change', render )
+	controls.addEventListener( 'change', render ) // on a change call render
 }
 
 
@@ -421,19 +359,6 @@ function addLights(){
 	//directional.shadowCameraVisible = true
 }
 
-
-function Collada(modelname, scale) {
-	var loader = new THREE.ColladaLoader();
-	var localObject;
-	loader.options.convertUpAxis = true;
-	loader.load( 'models/'+modelname+'.dae', function colladaReady( collada ) {
-	        localObject = collada.scene;
-	        localObject.scale.x = localObject.scale.y = localObject.scale.z = scale;
-	        localObject.updateMatrix();
-	    } );
-	    return localObject;
-	
-}
 
 
 

@@ -370,8 +370,8 @@ function setupThree(){
 	//  that will define the dimensions of our Camera's view.
 	
 	var
-	WIDTH      = 600,
-	HEIGHT     = 353,
+	WIDTH      = 960,
+	HEIGHT     = 540,
 	VIEW_ANGLE = 45,
 	ASPECT     = WIDTH / HEIGHT,
 	NEAR       = 0.1,

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>static/scripts/application.js</string>
+	<string>ThreeJS-mb/js/application-mb.js</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,86 +21,39 @@
 	<integer>293</integer>
 	<key>metaData</key>
 	<dict>
-		<key>static/scripts/ColladaLoader.js</key>
+		<key>ThreeJS-mb/index.html</key>
 		<dict>
 			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>4496</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>43</integer>
-		</dict>
-		<key>static/scripts/application.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>7</integer>
-				<key>line</key>
-				<integer>136</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>115</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>3</integer>
-				<key>line</key>
-				<integer>136</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>136</integer>
-			</dict>
-		</dict>
-		<key>templates/index.html</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>7</integer>
-				<key>line</key>
-				<integer>15</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>16</integer>
 			</dict>
-			<key>selectTo</key>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>ThreeJS-mb/js/application-mb.js</key>
+		<dict>
+			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>7</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>15</integer>
+				<integer>174</integer>
 			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>109</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>templates/index.html</string>
-		<string>static/scripts/application.js</string>
-		<string>static/scripts/ColladaLoader.js</string>
+		<string>ThreeJS-mb/index.html</string>
+		<string>ThreeJS-mb/js/application-mb.js</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
@@ -114,19 +67,34 @@
 			<true/>
 			<key>subItems</key>
 			<dict>
-				<key>static</key>
+				<key>ThreeJS-mb</key>
 				<dict>
 					<key>isExpanded</key>
 					<true/>
 					<key>subItems</key>
 					<dict>
-						<key>media</key>
+						<key>js</key>
 						<dict>
 							<key>isExpanded</key>
 							<true/>
 							<key>subItems</key>
 							<dict/>
 						</dict>
+						<key>vendor</key>
+						<dict>
+							<key>isExpanded</key>
+							<true/>
+							<key>subItems</key>
+							<dict/>
+						</dict>
+					</dict>
+				</dict>
+				<key>static</key>
+				<dict>
+					<key>isExpanded</key>
+					<true/>
+					<key>subItems</key>
+					<dict>
 						<key>scripts</key>
 						<dict>
 							<key>isExpanded</key>
@@ -143,17 +111,10 @@
 						</dict>
 					</dict>
 				</dict>
-				<key>templates</key>
-				<dict>
-					<key>isExpanded</key>
-					<true/>
-					<key>subItems</key>
-					<dict/>
-				</dict>
 			</dict>
 		</dict>
 	</dict>
 	<key>windowFrame</key>
-	<string>{{261, 55}, {1041, 823}}</string>
+	<string>{{0, 55}, {1292, 823}}</string>
 </dict>
 </plist>
