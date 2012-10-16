@@ -1,5 +1,3 @@
-
-
 /** @namespace */
 var THREEx	= THREEx 		|| {};
 
@@ -7,6 +5,7 @@ var THREEx	= THREEx 		|| {};
 // able to upload your screenshot without running servers
 
 // forced closure
+(function(){
 
 	/**
 	 * Take a screenshot of a renderer

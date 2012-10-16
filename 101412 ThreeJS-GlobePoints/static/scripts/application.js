@@ -226,20 +226,20 @@ function dropPin( latitude, longitude, color ){
 	group2 = new THREE.Object3D(),
 
 	markerTip= new THREE.Mesh(
-		new THREE.CylinderGeometry(1, 0,10, 100, 100, false),
+		new THREE.CylinderGeometry(.75, 0,5, 100, 100, false),
 		new THREE.MeshBasicMaterial({
-	            color: color
+	            color: 0x878483
 	        })
 		);
 	marker = new THREE.Mesh(
-		new THREE.CylinderGeometry(1, 1, 10, 100, 100, false),
+		new THREE.CylinderGeometry(.75, .75, 10, 100, 100, false),
 		new THREE.MeshBasicMaterial({
-	            color: color
+	            color: 0x878483
 	        })
 		);
 
 	markerHead= new THREE.Mesh(
-		new THREE.SphereGeometry( 5, 32, 32 ),
+		new THREE.SphereGeometry( 3, 32, 32 ),
 		new THREE.MeshBasicMaterial({
 	            color: color
 	        })
@@ -256,9 +256,9 @@ function dropPin( latitude, longitude, color ){
 	// 	})
 	
 
-	markerTip.position.y=earthRadius+2
-	marker.position.y = markerTip.position.y+5
-	markerHead.position.y=marker.position.y-10
+	markerTip.position.y=earthRadius-1
+	marker.position.y = markerTip.position.y+7
+	markerHead.position.y=marker.position.y+5
 
 	group1.add( marker )
 	group1.add( markerTip )
@@ -285,21 +285,21 @@ function render(){
 //  I'll leave this in for the moment for reference, but it seems to be
 //  having some issues ...
 
-function surfacePlot( params ){
+// function surfacePlot( params ){
 
-	params = cascade( params, {} )
-	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
-	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
-	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
-	params.radius    = cascade( params.radius, 60 )
+// 	params = cascade( params, {} )
+// 	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
+// 	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
+// 	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
+// 	params.radius    = cascade( params.radius, 60 )
 
-	var
-	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
-	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
-	z = params.center.z + params.latitude.sine()   * params.radius
+// 	var
+// 	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
+// 	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
+// 	z = params.center.z + params.latitude.sine()   * params.radius
 
-	return new THREE.Vector3( x, y, z )
-}
+// 	return new THREE.Vector3( x, y, z )
+// }
 
 
 function setupThree(){
@@ -436,7 +436,6 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
-
 
 
 
