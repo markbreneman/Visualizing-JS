@@ -1,0 +1,45 @@
+gui = new dat.GUI();
+	
+	parameters = 
+	{
+		x: 0, y: 30, z: 0,
+		color: "#ff0000", // color (change "#" to "0x")
+		opacity: 1, 
+		visible: true,
+		material: "Phong",
+		reset: function() { resetCube() }
+	};
+
+	var folder1 = gui.addFolder('Position');
+	var cubeX = folder1.add( parameters, 'x' ).min(-200).max(200).step(1).listen();
+	var cubeY = folder1.add( parameters, 'y' ).min(0).max(100).step(1).listen();
+	var cubeZ = folder1.add( parameters, 'z' ).min(-200).max(200).step(1).listen();
+	folder1.open();
+	
+	cubeX.onChange(function(value) 
+	{   cube.position.x = value;   });
+	cubeY.onChange(function(value) 
+	{   cube.position.y = value;   });
+	cubeZ.onChange(function(value) 
+	{   cube.position.z = value;   });
+	
+	var cubeColor = gui.addColor( parameters, 'color' ).name('Color').listen();
+	cubeColor.onChange(function(value) // onFinishChange
+	{   cube.material.color.setHex( value.replace("#", "0x") );   });
+	
+	var cubeOpacity = gui.add( parameters, 'opacity' ).min(0).max(1).step(0.01).name('Opacity').listen();
+	cubeOpacity.onChange(function(value)
+	{   cube.material.opacity = value;   });
+	
+	var cubeMaterial = gui.add( parameters, 'material', [ "Basic", "Lambert", "Phong", "Wireframe" ] ).name('Material Type').listen();
+	cubeMaterial.onChange(function(value) 
+	{   updateCube();   });
+	
+	var cubeVisible = gui.add( parameters, 'visible' ).name('Visible?').listen();
+	cubeVisible.onChange(function(value) 
+	{   cube.visible = value;  	});
+	
+	gui.add( parameters, 'reset' ).name("Reset Cube Parameters");
+	
+	gui.open();
+}

@@ -32,6 +32,17 @@
 	},
 	"file_history":
 	[
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/TwitterEarth.sublime-workspace",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/application.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/twitterEarth/templates/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/boilerplate/101512Boilerplate.sublime-project",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.py",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/extramodels.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/models/MESSENGER.dae",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/styles/base.css",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/app.yaml",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS Boilerplate-mb/js/application-mb.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/application.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/three.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/ThreeJS.sublime-project",
@@ -42,7 +53,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -56,6 +67,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dae"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -84,7 +96,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{

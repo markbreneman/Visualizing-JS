@@ -4,20 +4,23 @@
 //  helps us avoid strange errors--because if our document is ready that means
 //  all of our JavaScript libraries should have properly loaded too!
 
+
+//ADD THE SATELLITE
+
+
+
+/* 	THEMIS.updateMatrix(); */
+
 $( document ).ready( function(){
 	
 	
 	//  During our last class I spoke about what these functions are doing. 
 	//  Have another look at them on your own to jog your memory.
+} );
 
-	} );
 	
-
-
-
 	setupThree()
 	addLights()
-
 
 	//  This template includes mouse controls. 
 	//  Make sure that once you load this file in your browser that the browser 
@@ -139,23 +142,19 @@ $( document ).ready( function(){
 		0xFF372F
 	))
 
+var THEMIS;
 
-	//ADD THE SATELLITE
+var loader = new THREE.ColladaLoader();
+loader.options.convertUpAxis = true;
+loader.load( 'models/Themis.dae', function ( collada ) {
+	THEMIS = collada.scene;
+	THEMIS.scale.x =THEMIS.scale.y =THEMIS.scale.z = 10;
+	THEMIS.position.x= 110;
+	THEMIS.position.y= 110;
+	console.log(THEMIS)
 
-	var THEMIS;
-	
-	var loader = new THREE.ColladaLoader();
-	loader.options.convertUpAxis = true;
-	loader.load( 'models/Themis.dae', function ( collada ) {
-		THEMIS = collada.scene;
-		THEMIS.scale.x =THEMIS.scale.y =THEMIS.scale.z = 10;
-		THEMIS.position.x= 110
-		THEMIS.position.y= 110
-		console.log(THEMIS)
-	
+group.add(THEMIS)
 
-	/* 	THEMIS.updateMatrix(); */
-	group.add(THEMIS)
 
 
 	//  Finally, we add our group of objects to the Scene.
@@ -177,7 +176,7 @@ $( document ).ready( function(){
 			// allow 'f' to go fullscreen where this feature is supported
 			if( THREEx.FullScreen.available() ){
 				THREEx.FullScreen.bindKey();		
-				document.getElementById('inlineDoc').innerHTML	+= "- <i>f</i> for fullscreen";
+				document.getElementById('controls').innerHTML	+= "- <i>f</i> for fullscreen";
 			}
 	
 
@@ -225,16 +224,46 @@ function dropPin( latitude, longitude, color ){
 	var 
 	group1 = new THREE.Object3D(),
 	group2 = new THREE.Object3D(),
-	markerLength = 36,
+
+	markerTip= new THREE.Mesh(
+		new THREE.CylinderGeometry(1, 0,10, 100, 100, false),
+		new THREE.MeshBasicMaterial({
+	            color: color
+	        })
+		);
 	marker = new THREE.Mesh(
-		new THREE.CubeGeometry( 2, markerLength, 2 ),
-		new THREE.MeshBasicMaterial({ 
-			color: color
-		})
-	)
-	marker.position.y = earthRadius
+		new THREE.CylinderGeometry(1, 1, 10, 100, 100, false),
+		new THREE.MeshBasicMaterial({
+	            color: color
+	        })
+		);
+
+	markerHead= new THREE.Mesh(
+		new THREE.SphereGeometry( 5, 32, 32 ),
+		new THREE.MeshBasicMaterial({
+	            color: color
+	        })
+		);
+	
+	
+		
+	// marker.overdraw = true;
+	
+	// marker = new THREE.Mesh(
+	// 	new THREE.CubeGeometry( 2, markerLength, 2 ),
+	// 	new THREE.MeshBasicMaterial({ 
+	// 		color: color
+	// 	})
+	
+
+	markerTip.position.y=earthRadius+2
+	marker.position.y = markerTip.position.y+5
+	markerHead.position.y=marker.position.y-10
 
 	group1.add( marker )
+	group1.add( markerTip )
+	group1.add( markerHead )
+
 	group1.rotation.x = ( 90 - latitude  ).degreesToRadians()
 
 	group2.add( group1 )
@@ -256,21 +285,21 @@ function render(){
 //  I'll leave this in for the moment for reference, but it seems to be
 //  having some issues ...
 
-// function surfacePlot( params ){
+function surfacePlot( params ){
 
-// 	params = cascade( params, {} )
-// 	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
-// 	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
-// 	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
-// 	params.radius    = cascade( params.radius, 60 )
+	params = cascade( params, {} )
+	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
+	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
+	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
+	params.radius    = cascade( params.radius, 60 )
 
-// 	var
-// 	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
-// 	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
-// 	z = params.center.z + params.latitude.sine()   * params.radius
+	var
+	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
+	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
+	z = params.center.z + params.latitude.sine()   * params.radius
 
-// 	return new THREE.Vector3( x, y, z )
-// }
+	return new THREE.Vector3( x, y, z )
+}
 
 
 function setupThree(){
@@ -315,7 +344,8 @@ function setupThree(){
 	//  A renderer paints our Scene onto an HTML5 Canvas from the perspective 
 	//  of our Camera.
 	
-	window.renderer = new THREE.WebGLRenderer({ antialias: true })
+	window.renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
+
 	//window.renderer = new THREE.CanvasRenderer({ antialias: true })
 	renderer.setSize( WIDTH, HEIGHT )
 	renderer.shadowMapEnabled = true
@@ -346,17 +376,14 @@ function setupThree(){
 function addControls(){
 
 	window.controls = new THREE.TrackballControls( camera )
-
 	controls.rotateSpeed = 1.0
 	controls.zoomSpeed   = 1.2
 	controls.panSpeed    = 0.8
-
 	controls.noZoom = false
 	controls.noPan  = false
 	controls.staticMoving = true
 	controls.dynamicDampingFactor = 0.3
 	controls.keys = [ 65, 83, 68 ]//  ASCII values for A, S, and D
-
 	controls.addEventListener( 'change', render ) // on a change call render
 }
 
@@ -376,13 +403,11 @@ function addLights(){
 	ambient = new THREE.AmbientLight( 0x666666 )
 	scene.add( ambient )	
 	
-	
-	//  Now let's create a Directional light as our pretend sunshine.
-	
+
+	//  Now let's create a Directional light as our pretend sunshine.	
 	directional = new THREE.DirectionalLight( 0xCCCCCC )
 	directional.castShadow = true	
 	scene.add( directional )
-
 
 	//  Those lines above are enough to create another working light.
 	//  But we just can't leave well enough alone.
@@ -411,6 +436,7 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
+
 
 
 

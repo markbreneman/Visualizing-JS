@@ -28,3 +28,12 @@ body
 
 }
 
+#controls
+{
+		position: absolute;
+		top: 75%;
+		color: white;
+		left: 75%;
+}
+
+
