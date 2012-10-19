@@ -1,58 +1,61 @@
 
-//  Now that we've included jQuery we can use its syntax for determining if
-//  the full HTML page has been loaded. Waiting for the document to be ready
-//  helps us avoid strange errors--because if our document is ready that means
-//  all of our JavaScript libraries should have properly loaded too!
+$( document ).ready( function()	{
+	//Call the Google GeoCoder
+	window.geocoder = new google.maps.Geocoder()
 
-
-//ADD THE SATELLITE
-
-
-
-/* 	THEMIS.updateMatrix(); */
-
-$( document ).ready( function(){
-	
-	
-	//  During our last class I spoke about what these functions are doing. 
-	//  Have another look at them on your own to jog your memory.
-} );
-
-	
 	setupThree()
 	addLights()
-
-	//  This template includes mouse controls. 
-	//  Make sure that once you load this file in your browser that the browser 
-	//  window is in focus. (Just click anywhere on the loaded page.)
-	//  Hold down 'A' and move your mouse around to rotate around the scene.
-	//  Hold down 'S' and move your mouse up or down to zoom.
-	//  Hold down 'D' and move your mouse around to pan.
-
 	addControls()
 
-	//  Let's create a group to collect our objects together in.
-	//  This idea of grouping is going to replace the idea of 
-	//  pushMatrix() and popMatrix() that you might be familiar with
-	//  from Processing: 
-	//  We pack everything into a containing group and when we move or
-	//  rotate the group all of the group members follow along.
+	// create a set of coordinate axes to help orient user
+	// default size is 100 pixels in each direction; change size by setting scale
+	var axes = new THREE.AxisHelper();
+	axes.scale.set( 1, 1, 1 );
+	scene.add( axes );
 
-	//  Notice how we're not declaring a new variable, but attaching it to
-	//  the global "window" object. If we didn't this poor variable would be
-	//  limited to this function's scope only--we'd never be able to access
-	//  it elsewhere!
 
+	// var materialArray = [];
+	// materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'media/Space01a.png' ) }));
+	// materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'media/Space01b.png' ) }));
+	// materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'media/Space01c.png' ) }));
+	// materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'media/Space01d.png' ) }));
+	// materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'media/Space01e.png' ) }));
+	// materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'media/Space01f.png' ) }));
+	// var galaxyBoxGeom = new THREE.CubeGeometry( 5000, 5000, 5000, 1, 1, 1, materialArray );
+	// var galaxyBox = new THREE.Mesh( galaxyBoxGeom, new THREE.MeshFaceMaterial());
+	// galaxyBox.doubleSided = true;
+	// // galaxyBox.flipSided = false;
+	// galaxyBox.scale.x = -1;
+	// scene.add( galaxyBox )
+	
+	
+	var space = new THREE.Mesh(
+		new THREE.SphereGeometry( 2500, 300, 300 ),
+		new THREE.MeshLambertMaterial({ 
+			map: THREE.ImageUtils.loadTexture( 'media/Space02.jpg' )
+		})
+	)
+	space.position.set( 0, 0, 0 )
+	space.scale.x = -1;
+	space.receiveShadow = true
+	space.castShadow = true
+	scene.add(space)
+
+
+
+
+
+
+	//Create a Group to hold the objects
 	window.group = new THREE.Object3D()
 
 
-	//  Now for Earth. We're going to create a Sphere with a specific radius.
-	//  The other two params are for segmentsWidth and segmentsHeight.
-	//  The higher those values, the higher resolution (smoother) the curves
-	//  of your sphere will be. Play with the values and see for yourself.
-	//  The other thing to note is that we're going to texture the sphere
-	//  with an image. The textures used in this demo come from a VERY
-	//  useful resource: http://www.celestiamotherlode.net/catalog/earth.php
+	///SETUP TWITTER DATA
+	window.tweets        = []
+	window.tweetsIndex   = -1 //What is this for?
+	window.timePerTweet  = (3).seconds()
+	window.tweetApiArmed = false
+
 
 	window.earthRadius = 90
 	window.earth = new THREE.Mesh(
@@ -65,14 +68,6 @@ $( document ).ready( function(){
 	earth.receiveShadow = true
 	earth.castShadow = true
 	group.add( earth )
-
-
-	//  But what's Earth without a few clouds? Note here how we handle 
-	//  transparency (so you can see through the gaps in the clouds down to
-	//  Earth's surface) and how we use blending modes to make it happen.
-	//  Check out this really useful resource for understanding the blending
-	//  modes available in Three.js:
-	//	http://mrdoob.github.com/three.js/examples/webgl_materials_blending_custom.html
 
 	window.clouds = new THREE.Mesh(
 		new THREE.SphereGeometry( earthRadius + 2, 32, 32 ),
@@ -101,48 +96,11 @@ $( document ).ready( function(){
 	//  And if you're itching to read more about sphere mapping:
 	//  http://en.wikipedia.org/wiki/Longitude
 	//  http://en.wikipedia.org/wiki/Latitude
+	
 
-	
-	//Marks Points
-	
-	
-	
-	group.add( dropPin(//  Nice, France -------------------------------------
-	
-		43.7082, 
-		 7.2692, 
-		0xFF0000
-	))
-	
-	group.add( dropPin(//  Hue, Vietnam -------------------------------------
-	
-		16.4711, 
-	   107.5858, 
-		0xFFF300
-	))
-	
-	group.add( dropPin(//  St Gallen, Switzerland -------------------------------------
-	
-		47.4235, 
-	     9.3763, 
-		0xE82203
-	))
-	
-	group.add( dropPin(//  Bombay, India-------------------------------------
-	
-		18.9647, 
-	     72.8258, 
-		0xFFFFFF
-	))
-	
-	group.add( dropPin(//  Istanbul, Turkey-------------------------------------
-	
-		41.0128, 
-		28.9744, 
-		0xFF372F
-	))
+//Load Models
 
-var THEMIS;
+var THEMIS
 
 var loader = new THREE.ColladaLoader();
 loader.options.convertUpAxis = true;
@@ -151,40 +109,57 @@ loader.load( 'models/Themis.dae', function ( collada ) {
 	THEMIS.scale.x =THEMIS.scale.y =THEMIS.scale.z = 10;
 	THEMIS.position.x= 110;
 	THEMIS.position.y= 110;
-	console.log(THEMIS)
-
-group.add(THEMIS)
-
-
-
-	//  Finally, we add our group of objects to the Scene.
-
-	scene.add( group )
+	// console.log(THEMIS)
+	// group.add(THEMIS)
+} );
 
 
-	//  But also, did you want to start out looking at a different part of
-	//  the Earth?
+var ASTRONAUT
 
-	// group.rotation.y = ( -40 ).degreesToRadians()
-	// group.rotation.z = (  23 ).degreesToRadians()
+var loader = new THREE.ColladaLoader();
+loader.options.convertUpAxis = true;
+loader.load( 'models/Astronaut.dae', function ( collada ) {
+	ASTRONAUT = collada.scene;
+	ASTRONAUT.scale.x =ASTRONAUT.scale.y =ASTRONAUT.scale.z = 10;
+	ASTRONAUT.position.x= -110;
+	ASTRONAUT.position.y= -110;
+	// group.add(ASTRONAUT)
+} );
+
+scene.add( group )
 
 
+//  But also, did you want to start out looking at a different part of
+//  the Earth?
+
+// group.rotation.y = ( -40 ).degreesToRadians()
+// group.rotation.z = (  23 ).degreesToRadians()
 
 	var stats;
 
 	THREEx.Screenshot.bindKey(renderer);
-			// allow 'f' to go fullscreen where this feature is supported
-			if( THREEx.FullScreen.available() ){
-				THREEx.FullScreen.bindKey();		
-				document.getElementById('controls').innerHTML	+= "- <i>f</i> for fullscreen";
-			}
+
+	if( THREEx.FullScreen.available() ){
+							    		THREEx.FullScreen.bindKey();		
+										document.getElementById('controls').innerHTML += "- <i>f</i> for fullscreen";
+										}
+
 	
+	if( tweetApiArmed ) fetchTweets()
+	else {
+		
+		console.log( 'You are not fetching actually tweets, but loading canned tweets from your database.js file.' )
+		console.log( 'To change this find the "tweetApiArmed" variable in application.js and set it to true.' )
+		importTweets()
+	}
+	nextTweet()
 
-	//  Let's get our loop() on. 
-	//  We only need to call loop() once and from there it will call itself.
-	//  See inside the loop() function for more details.
 
-	loop()	
+
+loop()	
+
+// console.log(group)
+
 })
 
 
@@ -205,7 +180,6 @@ function loop(){
 	//  https://developer.mozilla.org/en-US/docs/DOM/window.requestAnimationFrame
 	//  And also note that Three.js modifies this function to account for
 	//  different browser implementations.
-	
 	window.requestAnimationFrame( loop )
 }
 
@@ -244,17 +218,6 @@ function dropPin( latitude, longitude, color ){
 	            color: color
 	        })
 		);
-	
-	
-		
-	// marker.overdraw = true;
-	
-	// marker = new THREE.Mesh(
-	// 	new THREE.CubeGeometry( 2, markerLength, 2 ),
-	// 	new THREE.MeshBasicMaterial({ 
-	// 		color: color
-	// 	})
-	
 
 	markerTip.position.y=earthRadius-1
 	marker.position.y = markerTip.position.y+7
@@ -265,41 +228,24 @@ function dropPin( latitude, longitude, color ){
 	group1.add( markerHead )
 
 	group1.rotation.x = ( 90 - latitude  ).degreesToRadians()
+	// console.log("rotation X = " + group1.rotation.x)
 
 	group2.add( group1 )
 	group2.rotation.y = ( 90 + longitude ).degreesToRadians()
-
+	// console.log("rotation Y = " + group1.rotation.y)
+	// console.log(group2)
 	return group2
+
 }
+
 
 
 //  Why separate this simple line of code from the loop() function?
 //  So that our controls can also call it separately.
 
 function render(){
-
 	renderer.render( scene, camera )
 }
-
-
-//  I'll leave this in for the moment for reference, but it seems to be
-//  having some issues ...
-
-// function surfacePlot( params ){
-
-// 	params = cascade( params, {} )
-// 	params.latitude  = cascade( params.latitude.degreesToRadians(),  0 )
-// 	params.longitude = cascade( params.longitude.degreesToRadians(), 0 )
-// 	params.center    = cascade( params.center, new THREE.Vector3( 0, 0, 0 ))
-// 	params.radius    = cascade( params.radius, 60 )
-
-// 	var
-// 	x = params.center.x + params.latitude.cosine() * params.longitude.cosine() * params.radius,
-// 	y = params.center.y + params.latitude.cosine() * params.longitude.sine()   * params.radius,
-// 	z = params.center.z + params.latitude.sine()   * params.radius
-
-// 	return new THREE.Vector3( x, y, z )
-// }
 
 
 function setupThree(){
@@ -318,7 +264,7 @@ function setupThree(){
 	//  But this feels more compact and contained, no?
 	
 	window.scene = new THREE.Scene()
-
+	
 
 	//  And now let's create a Camera object to look at our Scene.
 	//  In order to do that we need to think about some variable first
@@ -335,6 +281,7 @@ function setupThree(){
 	FAR        = 10000
 	
 	window.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR )
+	
 	camera.position.set( 0, 0, 300 )
 	camera.lookAt( scene.position )
 	scene.add( camera )
@@ -369,8 +316,6 @@ function setupThree(){
 	window.addEventListener( 'resize', onWindowResize, false );
 
 }
-
-
 
 
 function addControls(){
@@ -437,6 +382,275 @@ function onWindowResize() {
 
 }
 
+function locateWithGoogleMaps( text ){	
 
 
+	//  We also need to be wary of exceeding Google’s rate limiting.
+	//  But Google seems to be much more forgiving than Twitter.
+	//  If you want to be a good citizen you should sign up for a free 
+	//  API key and include that key in your HTML file. How? See here:
+	//  https://developers.google.com/maps/documentation/javascript/tutorial
+
+	//  For more on the geocoding service that we’re using see here:
+	//  https://developers.google.com/maps/documentation/javascript/geocoding
+	
+	geocoder.geocode( { 'address': text }, function( results, status ){
+
+		if( status == google.maps.GeocoderStatus.OK ){
+
+			console.log( '\nGoogle maps found a result for “'+ text +'”:' )
+			console.log( results[0].geometry.location )
+			tweets.push({
+
+				latitude:  results[0].geometry.location.lat(),
+				longitude: results[0].geometry.location.lng()
+			})
+		} 
+		else {
+
+			console.log( '\nNOPE. Even Google cound’t find “'+ text +'.”' )
+			console.log( 'Status code: '+ status )
+		}
+	})
+}
+
+
+function fetchTweets(){
+
+
+	//  https://api.twitter.com/1/account/rate_limit_status.json
+
+	console.log( '\n\nFetching fresh tweets from Twitter.' )
+	$.ajax({
+
+		url: 'http://search.twitter.com/search.json?geocode=0,0,6400km',
+
+		//  We have to use the datatype 'JSONp' (JavaScript Object Notation with
+		//  Padding) in order to safely fetch data that’s not coming from our own
+		//  domain name. (Basically, side-stepping a browser security issue.)
+
+		dataType: 'jsonp',
+		success: function( data ){
+
+			console.log( 'Received the following data from Twitter:' )
+			console.log( data )
+
+
+			//  If you check the console we’ve just ouput the Twitter data,
+			//  and the tweets themselves are stored in the data.results[]
+			//  array which we will loop through now:
+
+			data.results.forEach( function( tweet, i ){
+				
+				console.log( '\nInspecting tweet #'+ (i+1) +' of '+ data.results.length +'.' )
+				if( tweet.geo && 
+					tweet.geo.coordinates && 
+					tweet.geo.coordinates.type === 'Point' ){
+					
+					console.log( 'YES! Twitter had the latitude and longitude:' )
+					console.log( tweet.geo )
+					tweets.push({
+
+						latitude:  tweet.geo.coordinates[ 0 ],
+						longitude: tweet.geo.coordinates[ 1 ]
+					})
+				}
+				else if( tweet.location ){
+					
+					console.log( 'Ok. Only found a location name, will try Google Maps for:' )
+					console.log( tweet.location )
+					setTimeout( function(){
+						locateWithGoogleMaps( tweet.location )
+					}, i * timePerTweet.divide(2).round() )//Whats going on here?
+				}
+				else if( tweet.iso_language_code ){
+					
+					console.log( 'Not good: Resorting to the ISO language code as last hope:' )
+					console.log( tweet.iso_language_code )
+					setTimeout( function(){
+						locateWithGoogleMaps( tweet.iso_language_code )
+					}, i * timePerTweet.divide(2).round() )
+				}
+				else {
+
+					console.log( 'Sad face. We couldn’t find any useful data in this tweet.' )
+				}
+			})
+		},
+		error: function(){
+
+			console.log( 'Oops. Something went wrong requesting data from Twitter.' )
+		}
+	})
+}
+
+// convert the positions from a lat, lon to a position on a sphere.
+function latLongToVector3(latitude, longitude, radius, height) {
+	var phi = (latitude)*Math.PI/180;
+	var theta = (longitude-180)*Math.PI/180;
+
+	var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
+	var y = (radius+height) * Math.sin(phi);
+	var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
+
+	return new THREE.Vector3(x,y,z);
+}
+
+function connectLine(positionVector1, positionVector2){
+
+			var material = new THREE.LineBasicMaterial({
+                            color: 0x0000ff,
+                            linewidth: 30
+                            });
+
+			// //QUADRATIC BEZIER I
+   //          controlPoint = new THREE.Vector3()
+   //          controlPoint.sub(positionVector1,positionVector2)
+   //          controlPoint.x=Math.abs(controlPoint.x)
+   //          controlPoint.y=Math.abs(controlPoint.y)
+   //          arcShape = new THREE.QuadraticBezierCurve3(positionVector2, controlPoint, positionVector1)
+   //      	var points = arcShape.getPoints();
+   //          var spacedPoints = arcShape.getSpacedPoints( 100 );
+   //          // console.log(spacedPoints.length);
+   //          var geometry = new THREE.Geometry();
+   //          for(var i=0; i<spacedPoints.length-1; i++){
+   //          	var geometry = new THREE.Geometry();
+	  //           geometry.vertices.push(spacedPoints[i]);
+			// 	geometry.vertices.push(spacedPoints[i+1]);
+			// 	var line = new THREE.Line(geometry, material,THREE.LineStrip);	
+			// 	// console.log(geometry)
+			// 	group.add(line);	
+   //          }
+
+//     		QUADRATIC BEZIER II
+
+//     		Assume that you have two radius vectors v and w. Take the cross product r = cross(v,w) and its absolute value lr = |r| and determine the angle between v and w as a = arcsin(lr/(|v|*|w|)).
+
+// The rotation of v with a given angle x about axis nr = r/lr is achieved by
+
+// rot(v,x,nr)=v*cos(x)+dot(x,nr)*nr*(1-cos(x))+cross(nr,v)*sin(x)
+
+// All that remains is to draw an arc for the points obtained by letting x go from 0 to a.
+
+//     		crossProductVec = new THREE.Vector3()
+//     		crossProductVec.cross( positionVector1, positionVector2 )
+//     		absoluteCross= = new THREE.Vector3(Math.abs(crossProductVec.x),Math.abs(crossProductVec.y),Math.abs(crossProductVec.z))
+//     		absolutePos1= = new THREE.Vector3(Math.abs(positionVector1positionVector2.x),Math.abs(positionVector1.y),Math.abs(positionVector1.z))
+//     		absolutePos2= = new THREE.Vector3(Math.abs(positionVector2.x),Math.abs(positionVector2.y),Math.abs(positionVector2.z))
+
+//     		angleBtwn =  absoluteCross/absolutePos1.dot(absolutePos2)
+
+
+			// SCALED POINTS APPROACH
+			vector21 = new THREE.LineCurve(positionVector2,positionVector1)
+        	var points = vector21.getPoints();
+            var spacedPoints = vector21.getSpacedPoints( 100 );
+            // console.log(spacedPoints.length);
+
+
+            for(var i=0; i<spacedPoints.length-1; i++){
+             normalizedVector211 = new THREE.Vector3()
+             normalizedVector212 = new THREE.Vector3()
+             normalizedVector211.copy(spacedPoints[i])
+             normalizedVector212.copy(spacedPoints[i+1])
+
+             
+             normalizedVector211.normalize().multiplyScalar( earthRadius+2)
+             normalizedVector212.normalize().multiplyScalar( earthRadius+2)
+             // console.log(normalizedVector211)
+
+             var geometry = new THREE.Geometry();
+            geometry.vertices.push(normalizedVector211);
+			geometry.vertices.push(normalizedVector212);
+			var line = new THREE.Line(geometry, material,THREE.LineStrip);	
+			group.add(line);
+            }
+
+
+
+		  //STRAIGHT LINES
+          //   var geometry = new THREE.Geometry();
+          //   geometry.vertices.push(positionVector1);
+          //   geometry.vertices.push(positionVector2);
+          //   var line = new THREE.Line(geometry, material, THREE.LineStrip);
+          //   // console.log(line)
+         	// group.add(line)
+
+
+}
+
+function nextTweet(){
+	
+	if( tweetsIndex + 1 < tweets.length ){
+
+		tweetsIndex ++
+
+		//  Ideas for you crazy kids to spruce up your homework:
+		//  1. Only shine the sun on the part of Earth that is actually
+		//     currently experience daylight!
+		//  2. Rotate the globe to face the tweet you’re plotting.
+		//  3. Don’t just place the pin, but animate its appearance;
+		//     maybe it grows out of the Earth?
+		//  4. Display the contents of the tweet. I know, I know. We haven’t
+		//     even talked about text in Three.js yet. That’s why you’d get
+		//     über bragging rights.
+
+		group.add( dropPin(
+
+			tweets[ tweetsIndex ].latitude,
+			tweets[ tweetsIndex ].longitude,
+			0xFFFF00
+		))
+
+		// console.log(group)
+
+
+
+		tweet1 = latLongToVector3(tweets[ tweetsIndex ].latitude, tweets[ tweetsIndex ].longitude, earthRadius, 1)
+		tweet2 = latLongToVector3(tweets[ tweetsIndex+1 ].latitude,tweets[ tweetsIndex+1 ].longitude, earthRadius, 1 )
+
+		connectLine(tweet2,tweet1)
+
+		//  I’m trying to be very mindful of Twitter’s rate limiting.
+		//  Let’s only try fetching more tweets only when we’ve exhausted our
+		//  tweets[] array supply.
+		//  But leave this commented out when testing!
+		
+		//if( tweetsIndex === tweets.length - 1 ) fetchTweets()
+	}	
+	setTimeout( nextTweet, timePerTweet )
+}
+
+
+function exportTweets(){
+
+
+	//  Another way to be mindful of rate limiting is to PLAN AHEAD.
+	//  Why not save out this data you’ve already acquired?
+	//  This will dump your tweet data into the console for you
+	//  so you can copy + paste it into your /scripts/database.js file.
+
+	var data = 'database = database.concat(['
+	tweets.forEach( function( tweet, i ){
+
+		data += '\n	{'
+		data += '\n		latitude:  '+ tweet.latitude +','
+		data += '\n		longitude: '+ tweet.longitude
+		data += '\n	}'
+		if( i < tweets.length - 1 ) data += ','
+	})
+	data += '\n])'
+	console.log( data )
+}
+
+
+
+
+function importTweets(){
+
+	//  Did you save any tweets to your /scripts/database.js file?
+	//  If so, you can add those right in!
+
+	tweets = tweets.concat( database )
+}
 
