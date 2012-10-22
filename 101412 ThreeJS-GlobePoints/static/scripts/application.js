@@ -9,9 +9,9 @@ $( document ).ready( function()	{
 
 	// create a set of coordinate axes to help orient user
 	// default size is 100 pixels in each direction; change size by setting scale
-	var axes = new THREE.AxisHelper();
-	axes.scale.set( 1, 1, 1 );
-	scene.add( axes );
+	// var axes = new THREE.AxisHelper();
+	// axes.scale.set( 1, 1, 1 );
+	// scene.add( axes );
 
 
 	// var materialArray = [];
@@ -40,10 +40,6 @@ $( document ).ready( function()	{
 	space.receiveShadow = true
 	space.castShadow = true
 	scene.add(space)
-
-
-
-
 
 
 	//Create a Group to hold the objects
@@ -134,8 +130,7 @@ scene.add( group )
 
 // group.rotation.y = ( -40 ).degreesToRadians()
 // group.rotation.z = (  23 ).degreesToRadians()
-
-	var stats;
+var stats;
 
 	THREEx.Screenshot.bindKey(renderer);
 
@@ -154,11 +149,8 @@ scene.add( group )
 	}
 	nextTweet()
 
-
-
 loop()	
 
-// console.log(group)
 
 })
 
@@ -182,8 +174,6 @@ function loop(){
 	//  different browser implementations.
 	window.requestAnimationFrame( loop )
 }
-
-
 
 
 //  Nesting rotations correctly is an exercise in patience.
@@ -214,9 +204,9 @@ function dropPin( latitude, longitude, color ){
 
 	markerHead= new THREE.Mesh(
 		new THREE.SphereGeometry( 3, 32, 32 ),
-		new THREE.MeshBasicMaterial({
-	            color: color
-	        })
+		new THREE.MeshLambertMaterial({ 
+		        color: color
+		})
 		);
 
 	markerTip.position.y=earthRadius-1
@@ -226,14 +216,10 @@ function dropPin( latitude, longitude, color ){
 	group1.add( marker )
 	group1.add( markerTip )
 	group1.add( markerHead )
-
 	group1.rotation.x = ( 90 - latitude  ).degreesToRadians()
-	// console.log("rotation X = " + group1.rotation.x)
-
+	
 	group2.add( group1 )
 	group2.rotation.y = ( 90 + longitude ).degreesToRadians()
-	// console.log("rotation Y = " + group1.rotation.y)
-	// console.log(group2)
 	return group2
 
 }
@@ -286,7 +272,6 @@ function setupThree(){
 	camera.lookAt( scene.position )
 	scene.add( camera )
 
-
 	//  Finally, create a Renderer to render the Scene we're looking at.
 	//  A renderer paints our Scene onto an HTML5 Canvas from the perspective 
 	//  of our Camera.
@@ -332,7 +317,15 @@ function addControls(){
 	controls.addEventListener( 'change', render ) // on a change call render
 }
 
+function moveToPoint( latitude, longitude ) {
 
+		var phi = latitude * Math.PI / 180;
+		var theta = longitude * Math.PI / 180;
+
+		target.x = - Math.PI / 2 + theta;
+		target.y = phi;
+		
+	}
 
 
 function addLights(){
@@ -499,54 +492,17 @@ function latLongToVector3(latitude, longitude, radius, height) {
 function connectLine(positionVector1, positionVector2){
 
 			var material = new THREE.LineBasicMaterial({
-                            color: 0x0000ff,
-                            linewidth: 30
+                            color: 0x74ffa3,
+                            linewidth: 1
                             });
 
-			// //QUADRATIC BEZIER I
-   //          controlPoint = new THREE.Vector3()
-   //          controlPoint.sub(positionVector1,positionVector2)
-   //          controlPoint.x=Math.abs(controlPoint.x)
-   //          controlPoint.y=Math.abs(controlPoint.y)
-   //          arcShape = new THREE.QuadraticBezierCurve3(positionVector2, controlPoint, positionVector1)
-   //      	var points = arcShape.getPoints();
-   //          var spacedPoints = arcShape.getSpacedPoints( 100 );
-   //          // console.log(spacedPoints.length);
-   //          var geometry = new THREE.Geometry();
-   //          for(var i=0; i<spacedPoints.length-1; i++){
-   //          	var geometry = new THREE.Geometry();
-	  //           geometry.vertices.push(spacedPoints[i]);
-			// 	geometry.vertices.push(spacedPoints[i+1]);
-			// 	var line = new THREE.Line(geometry, material,THREE.LineStrip);	
-			// 	// console.log(geometry)
-			// 	group.add(line);	
-   //          }
-
-//     		QUADRATIC BEZIER II
-
-//     		Assume that you have two radius vectors v and w. Take the cross product r = cross(v,w) and its absolute value lr = |r| and determine the angle between v and w as a = arcsin(lr/(|v|*|w|)).
-
-// The rotation of v with a given angle x about axis nr = r/lr is achieved by
-
-// rot(v,x,nr)=v*cos(x)+dot(x,nr)*nr*(1-cos(x))+cross(nr,v)*sin(x)
-
-// All that remains is to draw an arc for the points obtained by letting x go from 0 to a.
-
-//     		crossProductVec = new THREE.Vector3()
-//     		crossProductVec.cross( positionVector1, positionVector2 )
-//     		absoluteCross= = new THREE.Vector3(Math.abs(crossProductVec.x),Math.abs(crossProductVec.y),Math.abs(crossProductVec.z))
-//     		absolutePos1= = new THREE.Vector3(Math.abs(positionVector1positionVector2.x),Math.abs(positionVector1.y),Math.abs(positionVector1.z))
-//     		absolutePos2= = new THREE.Vector3(Math.abs(positionVector2.x),Math.abs(positionVector2.y),Math.abs(positionVector2.z))
-
-//     		angleBtwn =  absoluteCross/absolutePos1.dot(absolutePos2)
-
+	
 
 			// SCALED POINTS APPROACH
 			vector21 = new THREE.LineCurve(positionVector2,positionVector1)
         	var points = vector21.getPoints();
-            var spacedPoints = vector21.getSpacedPoints( 100 );
-            // console.log(spacedPoints.length);
-
+            var spacedPoints = vector21.getSpacedPoints( 50 );
+            
 
             for(var i=0; i<spacedPoints.length-1; i++){
              normalizedVector211 = new THREE.Vector3()
@@ -557,24 +513,14 @@ function connectLine(positionVector1, positionVector2){
              
              normalizedVector211.normalize().multiplyScalar( earthRadius+2)
              normalizedVector212.normalize().multiplyScalar( earthRadius+2)
-             // console.log(normalizedVector211)
+            
 
              var geometry = new THREE.Geometry();
             geometry.vertices.push(normalizedVector211);
 			geometry.vertices.push(normalizedVector212);
-			var line = new THREE.Line(geometry, material,THREE.LineStrip);	
+			var line = new THREE.Line(geometry, material, THREE.LineStrip);	
 			group.add(line);
-            }
-
-
-
-		  //STRAIGHT LINES
-          //   var geometry = new THREE.Geometry();
-          //   geometry.vertices.push(positionVector1);
-          //   geometry.vertices.push(positionVector2);
-          //   var line = new THREE.Line(geometry, material, THREE.LineStrip);
-          //   // console.log(line)
-         	// group.add(line)
+           }
 
 
 }
@@ -599,17 +545,14 @@ function nextTweet(){
 
 			tweets[ tweetsIndex ].latitude,
 			tweets[ tweetsIndex ].longitude,
-			0xFFFF00
+			0Xff0e28
 		))
 
-		// console.log(group)
-
-
-
+		if(tweetsIndex>0){
 		tweet1 = latLongToVector3(tweets[ tweetsIndex ].latitude, tweets[ tweetsIndex ].longitude, earthRadius, 1)
-		tweet2 = latLongToVector3(tweets[ tweetsIndex+1 ].latitude,tweets[ tweetsIndex+1 ].longitude, earthRadius, 1 )
-
+		tweet2 = latLongToVector3(tweets[ tweetsIndex-1 ].latitude,tweets[ tweetsIndex-1 ].longitude, earthRadius, 1 )
 		connectLine(tweet2,tweet1)
+		}
 
 		//  I’m trying to be very mindful of Twitter’s rate limiting.
 		//  Let’s only try fetching more tweets only when we’ve exhausted our
