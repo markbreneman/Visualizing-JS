@@ -32,7 +32,8 @@ $( document ).ready( function()	{
 	var space = new THREE.Mesh(
 		new THREE.SphereGeometry( 2500, 300, 300 ),
 		new THREE.MeshLambertMaterial({ 
-			map: THREE.ImageUtils.loadTexture( 'media/Space02.jpg' )
+			// map: THREE.ImageUtils.loadTexture( 'media/tycho8.jpg' )
+		map: THREE.ImageUtils.loadTexture( 'media/Space02.png' )
 		})
 	)
 	space.position.set( 0, 0, 0 )
@@ -51,15 +52,30 @@ $( document ).ready( function()	{
 	window.tweetsIndex   = -1 //What is this for?
 	window.timePerTweet  = (3).seconds()
 	window.tweetApiArmed = false
-
+ 
+ 
+	var earthBumpMap = THREE.ImageUtils.loadTexture( "media/earthbump1k.jpg" );
+	// var cloudBumpMap = THREE.ImageUtils.loadTexture( "media/fair_clouds8k.jpg" );
 
 	window.earthRadius = 90
 	window.earth = new THREE.Mesh(
-		new THREE.SphereGeometry( earthRadius, 300, 300 ),
-		new THREE.MeshLambertMaterial({ 
-			map: THREE.ImageUtils.loadTexture( 'media/earthTexture.png' )
+		new THREE.SphereGeometry( earthRadius, 300, 300 ),	
+		new THREE.MeshPhongMaterial({ 
+			// map: THREE.ImageUtils.loadTexture( 'media/earthTexture.png' )
+			map: THREE.ImageUtils.loadTexture( 'media/earthmap1k.jpg' ),
+			transparency: true, 
+			opacity: 1, 
+			ambient: 0xFFFFFF, 
+			color: 0xFFFFFF, 
+			specular: 0xFFFFFF, 
+			shininess: 25, 
+			perPixel: true,
+			bumpMap: earthBumpMap,
+			bumpScale: 5,
+			metal: true
 		})
 	)
+
 	earth.position.set( 0, 0, 0 )
 	earth.receiveShadow = true
 	earth.castShadow = true
@@ -67,7 +83,7 @@ $( document ).ready( function()	{
 
 	window.clouds = new THREE.Mesh(
 		new THREE.SphereGeometry( earthRadius + 2, 32, 32 ),
-		new THREE.MeshLambertMaterial({ 
+		new THREE.MeshPhongMaterial({ 
 			map: THREE.ImageUtils.loadTexture( 'media/cloudsTexture.png' ),
 			transparent: true,
 			blending: THREE.CustomBlending,
@@ -81,55 +97,73 @@ $( document ).ready( function()	{
 	clouds.castShadow = true
 	group.add( clouds )	
 	
-	//  Working with latitude and longitude can be tricky at first
-	//  because it feels like X and Y have been swapped
-	//  and you also have to remember South and West are negative!
-	//  Here are the boundaries of the coordinate system:
 
-	//  Latitude	North +90	South -90
-	//  Longitude	West -180	East +180
-
-	//  And if you're itching to read more about sphere mapping:
-	//  http://en.wikipedia.org/wiki/Longitude
-	//  http://en.wikipedia.org/wiki/Latitude
 	
 
 //Load Models
 
-var THEMIS
+// var THEMIS
 
-var loader = new THREE.ColladaLoader();
-loader.options.convertUpAxis = true;
-loader.load( 'models/Themis.dae', function ( collada ) {
-	THEMIS = collada.scene;
-	THEMIS.scale.x =THEMIS.scale.y =THEMIS.scale.z = 10;
-	THEMIS.position.x= 110;
-	THEMIS.position.y= 110;
-	// console.log(THEMIS)
-	// group.add(THEMIS)
-} );
+// var loader = new THREE.ColladaLoader();
+// loader.options.convertUpAxis = true;
+// loader.load( 'models/Themis.dae', function ( collada ) {
+// 	THEMIS = collada.scene;
+// 	THEMIS.scale.x =THEMIS.scale.y =THEMIS.scale.z = 10;
+// 	THEMIS.position.x= 110;
+// 	THEMIS.position.y= 110;
+// 	// console.log(THEMIS)
+// 	// group.add(THEMIS)
+// } );
 
 
-var ASTRONAUT
+// var ASTRONAUT
 
-var loader = new THREE.ColladaLoader();
-loader.options.convertUpAxis = true;
-loader.load( 'models/Astronaut.dae', function ( collada ) {
-	ASTRONAUT = collada.scene;
-	ASTRONAUT.scale.x =ASTRONAUT.scale.y =ASTRONAUT.scale.z = 10;
-	ASTRONAUT.position.x= -110;
-	ASTRONAUT.position.y= -110;
-	// group.add(ASTRONAUT)
-} );
+// var loader = new THREE.ColladaLoader();
+// loader.options.convertUpAxis = true;
+// loader.load( 'models/Astronaut.dae', function ( collada ) {
+// 	ASTRONAUT = collada.scene;
+// 	ASTRONAUT.scale.x =ASTRONAUT.scale.y =ASTRONAUT.scale.z = 10;
+// 	ASTRONAUT.position.x= -110;
+// 	ASTRONAUT.position.y= -110;
+// 	// group.add(ASTRONAUT)
+// } );
+
+
+var theText = "Tweets.";
+
+var hash = document.location.hash.substr( 1 );
+
+if ( hash.length !== 0 ) {
+
+	theText = hash;
+
+}
+
+var text3d = new THREE.TextGeometry( theText, {
+
+	size: 10,
+	height: 1,
+	curveSegments: 2,
+	font: "helvetiker"
+});
+
+text3d.computeBoundingBox();
+var centerOffset = -0.5 * ( text3d.boundingBox.max.x - text3d.boundingBox.min.x );
+
+var textMaterial = new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff, overdraw: true } );
+text = new THREE.Mesh( text3d, textMaterial );
+
+text.position.x = centerOffset;
+text.position.y = 100;
+text.position.z = 0;
+
+text.rotation.x = 0;
+text.rotation.y = Math.PI * 2;
+group.add(text)
 
 scene.add( group )
 
 
-//  But also, did you want to start out looking at a different part of
-//  the Earth?
-
-// group.rotation.y = ( -40 ).degreesToRadians()
-// group.rotation.z = (  23 ).degreesToRadians()
 var stats;
 
 	THREEx.Screenshot.bindKey(renderer);
@@ -417,6 +451,7 @@ function fetchTweets(){
 	$.ajax({
 
 		url: 'http://search.twitter.com/search.json?geocode=0,0,6400km',
+		// url: 'http://search.twitter.com/search.json?q=tweet',
 
 		//  We have to use the datatype 'JSONp' (JavaScript Object Notation with
 		//  Padding) in order to safely fetch data that’s not coming from our own
@@ -559,7 +594,7 @@ function nextTweet(){
 		//  tweets[] array supply.
 		//  But leave this commented out when testing!
 		
-		//if( tweetsIndex === tweets.length - 1 ) fetchTweets()
+		// if( tweetsIndex === tweets.length - 1 ) fetchTweets()
 	}	
 	setTimeout( nextTweet, timePerTweet )
 }
