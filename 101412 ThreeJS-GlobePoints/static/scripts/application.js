@@ -2,6 +2,8 @@
 $( document ).ready( function()	{
 	//Call the Google GeoCoder
 	window.geocoder = new google.maps.Geocoder()
+	
+	window.cameratarget = new THREE.Object3D()
 
 	setupThree()
 	addLights()
@@ -112,7 +114,7 @@ $( document ).ready( function()	{
 // 	THEMIS.position.x= 110;
 // 	THEMIS.position.y= 110;
 // 	// console.log(THEMIS)
-// 	// group.add(THEMIS)
+// 	group.add(THEMIS)
 // } );
 
 
@@ -125,11 +127,12 @@ $( document ).ready( function()	{
 // 	ASTRONAUT.scale.x =ASTRONAUT.scale.y =ASTRONAUT.scale.z = 10;
 // 	ASTRONAUT.position.x= -110;
 // 	ASTRONAUT.position.y= -110;
-// 	// group.add(ASTRONAUT)
+// 	group.add(ASTRONAUT)
 // } );
 
 
-var theText = "Tweets.";
+var theText = "Pale Blue Dot."
+var path= new THREE.CurvePath()
 
 var hash = document.location.hash.substr( 1 );
 
@@ -150,7 +153,7 @@ var text3d = new THREE.TextGeometry( theText, {
 text3d.computeBoundingBox();
 var centerOffset = -0.5 * ( text3d.boundingBox.max.x - text3d.boundingBox.min.x );
 
-var textMaterial = new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff, overdraw: true } );
+var textMaterial = new THREE.MeshBasicMaterial( { color:0x4371ff, overdraw: true } );
 text = new THREE.Mesh( text3d, textMaterial );
 
 text.position.x = centerOffset;
@@ -303,7 +306,9 @@ function setupThree(){
 	window.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR )
 	
 	camera.position.set( 0, 0, 300 )
-	camera.lookAt( scene.position )
+	// console.log(target)
+	// camera.lookAt( scene.position )
+
 	scene.add( camera )
 
 	//  Finally, create a Renderer to render the Scene we're looking at.
@@ -356,8 +361,8 @@ function moveToPoint( latitude, longitude ) {
 		var phi = latitude * Math.PI / 180;
 		var theta = longitude * Math.PI / 180;
 
-		target.x = - Math.PI / 2 + theta;
-		target.y = phi;
+		cameratarget.position.x = - Math.PI / 2 + theta;
+		cameratarget.position.y = phi;
 		
 	}
 
@@ -435,7 +440,7 @@ function locateWithGoogleMaps( text ){
 		} 
 		else {
 
-			console.log( '\nNOPE. Even Google cound’t find “'+ text +'.”' )
+			console.log( '\n NOPE. Even Google cound’t find “'+ text +'.”' )
 			console.log( 'Status code: '+ status )
 		}
 	})
@@ -521,6 +526,9 @@ function latLongToVector3(latitude, longitude, radius, height) {
 	var y = (radius+height) * Math.sin(phi);
 	var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
 
+	// moveToPoint( latitude,longitude)
+
+
 	return new THREE.Vector3(x,y,z);
 }
 
@@ -531,10 +539,8 @@ function connectLine(positionVector1, positionVector2){
                             linewidth: 1
                             });
 
-	
-
 			// SCALED POINTS APPROACH
-			vector21 = new THREE.LineCurve(positionVector2,positionVector1)
+			window.vector21 = new THREE.LineCurve(positionVector2,positionVector1)
         	var points = vector21.getPoints();
             var spacedPoints = vector21.getSpacedPoints( 50 );
             
@@ -554,7 +560,21 @@ function connectLine(positionVector1, positionVector2){
             geometry.vertices.push(normalizedVector211);
 			geometry.vertices.push(normalizedVector212);
 			var line = new THREE.Line(geometry, material, THREE.LineStrip);	
+			console.log(line)
 			group.add(line);
+			
+			// // setting camera postion to target
+			// var pincameraposition=new THREE.Vector3()
+			// pincameraposition.copy(positionVector2)
+
+			// pincameraposition.normalize().multiplyScalar(earthRadius+300)
+			// console.log("pin camera")
+			// console.log(pincameraposition)
+			// console.log("positionVector1")
+			// console.log(positionVector1)
+			// camera.position=pincameraposition
+			// camera.lookAt( positionVector1)
+
            }
 
 
@@ -594,7 +614,7 @@ function nextTweet(){
 		//  tweets[] array supply.
 		//  But leave this commented out when testing!
 		
-		// if( tweetsIndex === tweets.length - 1 ) fetchTweets()
+		if( tweetsIndex === tweets.length - 1 ) fetchTweets()
 	}	
 	setTimeout( nextTweet, timePerTweet )
 }

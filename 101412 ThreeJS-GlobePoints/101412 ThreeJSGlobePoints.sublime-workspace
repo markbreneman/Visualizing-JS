@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"norma",
+				"normalizedVector211"
+			],
+			[
+				"norm",
+				"normalizedVector211"
+			],
+			[
+				"pin",
+				"pincameraposition"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"text",
+				"text3d"
+			],
+			[
 				"normaliz",
 				"normalizedVector212"
 			],
@@ -18,10 +38,6 @@
 			[
 				"pos",
 				"positionVector1"
-			],
-			[
-				"po",
-				"positionVector2"
 			],
 			[
 				"S",
@@ -116,9 +132,16 @@
 	},
 	"file_history":
 	[
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/styles/base.css",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/index.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/application.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/models/Astronaut.dae",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/DAT.GUI.min.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/favicon.ico",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/app.yaml",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/101412 ThreeJSGlobePoints.sublime-project",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/helvetiker_regular.typeface.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.py",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/styles/base.css",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/curve.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/mrdoob-three.js-ef5f05d/examples/webgl_geometry_shapes.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/media/Space02.jpg",
@@ -133,10 +156,8 @@
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/TwitterEarth.sublime-workspace",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/twitterEarth/templates/index.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/boilerplate/101512Boilerplate.sublime-project",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.py",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/extramodels.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/models/MESSENGER.dae",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/app.yaml",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS Boilerplate-mb/js/application-mb.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/application.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/three.js",
@@ -163,6 +184,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bump",
+			"armed",
+			"text",
+			"setup",
+			"console.log",
+			"armed",
 			"surface ",
 			"tweets",
 			"tweetIndex",
