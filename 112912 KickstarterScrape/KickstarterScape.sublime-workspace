@@ -4,72 +4,16 @@
 		"selected_items":
 		[
 			[
-				"twee",
-				"tweetZ"
+				"pledge",
+				"pledge_deadline"
 			],
 			[
-				"tweet",
-				"tweetZ"
+				"pled",
+				"pledge_amount"
 			],
 			[
-				"norma",
-				"normalizedVector212"
-			],
-			[
-				"x",
-				"xROTANGLE"
-			],
-			[
-				"length",
-				"lengthCoord"
-			],
-			[
-				"dot",
-				"dotx"
-			],
-			[
-				"text",
-				"textObject"
-			],
-			[
-				"url",
-				"urlSearch"
-			],
-			[
-				"ve",
-				"vector21"
-			],
-			[
-				"tw",
-				"tweetText"
-			],
-			[
-				"tweetTe",
-				"tweetText"
-			],
-			[
-				"tweets",
-				"tweetsIndex"
-			],
-			[
-				"tweetTex",
-				"tweetTexts"
-			],
-			[
-				"create",
-				"createArcText"
-			],
-			[
-				"norm",
-				"normalizedVector211"
-			],
-			[
-				"pin",
-				"pincameraposition"
-			],
-			[
-				"po",
-				"position"
+				"pl",
+				"pledge_deadline"
 			],
 			[
 				"normaliz",
@@ -86,6 +30,10 @@
 			[
 				"pos",
 				"positionVector1"
+			],
+			[
+				"po",
+				"positionVector2"
 			],
 			[
 				"S",
@@ -180,33 +128,39 @@
 	},
 	"file_history":
 	[
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.html",
-		"/Users/markbreneman/Desktop/itp-py-dwd-remote-apis-master/DWDRemoteAPIExample.sublime-project",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/application.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/101412 ThreeJSGlobePoints.sublime-project",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/media/Space01b.png",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/application1.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/three51DevTweak.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/three51.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/three.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/three53.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/test.html",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/TextPath.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/extramodels.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/three52.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/ExtrudeGeometry.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/scripts/database.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.yaml",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/main.py",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/application.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/index.html",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/models/Astronaut.dae",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/DAT.GUI.min.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/favicon.ico",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/app.yaml",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/helvetiker_regular.typeface.js",
-		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.py",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/views/main.erb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter/project.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/TestData.txt",
+		"/Users/markbreneman/Desktop/KickStarterScrape2.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter/version.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/KickStarterScrape.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/erb/main.erb",
+		"/Users/markbreneman/Desktop/kickstarter-master/project",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/requirements.txt",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/README.markdown",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Understanding Networks/03 Data/Flux/README.md",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Understanding Networks/03 Data/README.md",
+		"/Users/markbreneman/Downloads/phonegap-phonegap-8a3aa47/README.md",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/templates/main.html",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/models.py",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/templates/layout/main.html",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/templates/idea_entry.html",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/app.py",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/MongoDB-Week6",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/_posts/2012-10-22-MakeMatics-SVM-SpiceIndex.md",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/images/2012-10-22-MakeMatics-SVM-SpiceIndex-04.jpg",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/images/2012-10-22-MakeMatics-SVM-SpiceIndex-00.jpg",
+		"/Users/markbreneman/Downloads/svm models/README",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/_posts/2012-10-20-MakeMatics-Week3.md",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/slides/slidesref.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/slides/slides.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/sourcelocalization/app.yaml",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/app/main.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/styles/base.css",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/application.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/curve.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/mrdoob-three.js-ef5f05d/examples/webgl_geometry_shapes.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/media/Space02.jpg",
@@ -221,8 +175,10 @@
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/TwitterEarth.sublime-workspace",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/twitterEarth/templates/index.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/boilerplate/101512Boilerplate.sublime-project",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.py",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/extramodels.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/models/MESSENGER.dae",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/app.yaml",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS Boilerplate-mb/js/application-mb.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/application.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/three.js",
@@ -238,10 +194,9 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
-			"application.js",
 			""
 		]
 	},
@@ -250,39 +205,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"tweetZ",
-			"next",
-			"scene",
-			"next",
-			"scene",
-			" = []",
-			"tweet = []",
-			"tweets = []",
-			"createArc",
-			"connect",
-			">\n",
-			"latLongToVector3",
-			"create",
-			"arc",
-			"tweettexts",
-			"LOOP",
-			"tweets",
-			"next",
-			"latLongToVector3",
-			"twitter",
-			"query",
-			"track",
-			"controls",
-			"Tube",
-			"$",
-			"text",
-			"console",
-			"bump",
-			"armed",
-			"text",
-			"setup",
-			"console.log",
-			"armed",
+			"antharion",
+			":handle",
+			":name",
 			"surface ",
 			"tweets",
 			"tweetIndex",
@@ -312,7 +237,7 @@
 		"regex": false,
 		"replace_history":
 		[
-			"jQuery",
+			"name:",
 			"galaxyBox"
 		],
 		"reverse": false,
