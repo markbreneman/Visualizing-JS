@@ -1,0 +1,317 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pledge",
+				"pledge_deadline"
+			],
+			[
+				"pled",
+				"pledge_amount"
+			],
+			[
+				"pl",
+				"pledge_deadline"
+			],
+			[
+				"normaliz",
+				"normalizedVector212"
+			],
+			[
+				"ea",
+				"earthRadius"
+			],
+			[
+				"space",
+				"spacedPoints"
+			],
+			[
+				"pos",
+				"positionVector1"
+			],
+			[
+				"po",
+				"positionVector2"
+			],
+			[
+				"S",
+				"Scene"
+			],
+			[
+				"posi",
+				"positionVector2"
+			],
+			[
+				"cros",
+				"crossProductVec"
+			],
+			[
+				"conr",
+				"controlPoint"
+			],
+			[
+				"control",
+				"controlPoint"
+			],
+			[
+				"sub",
+				"subtractionVector"
+			],
+			[
+				"Line",
+				"LineStrip"
+			],
+			[
+				"each",
+				"forEach"
+			],
+			[
+				"position",
+				"positionVector1"
+			],
+			[
+				"lat",
+				"latLongToVector3"
+			],
+			[
+				"point",
+				"point1"
+			],
+			[
+				"earth",
+				"earthRadius"
+			],
+			[
+				"eart",
+				"earthRadius"
+			],
+			[
+				"A",
+				"ASTRONAUT"
+			],
+			[
+				"marker",
+				"markerHead"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 267.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/KickStarterScrape.rb",
+		"/Users/markbreneman/Desktop/100812_OffLeashHerokuWithMongoDB/OffLeash.sublime-project",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/views/main.erb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter/project.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/TestData.txt",
+		"/Users/markbreneman/Desktop/KickStarterScrape2.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter/version.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/KickStarterScrape.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/erb/main.erb",
+		"/Users/markbreneman/Desktop/kickstarter-master/project",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/requirements.txt",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/README.markdown",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Understanding Networks/03 Data/Flux/README.md",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Understanding Networks/03 Data/README.md",
+		"/Users/markbreneman/Downloads/phonegap-phonegap-8a3aa47/README.md",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/templates/main.html",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/models.py",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/templates/layout/main.html",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/templates/idea_entry.html",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/app.py",
+		"/Users/markbreneman/Desktop/johnschimmel-ITP-DWD-Fall-2012-Week-5-5f753ce/MongoDB-Week6",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/_posts/2012-10-22-MakeMatics-SVM-SpiceIndex.md",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/images/2012-10-22-MakeMatics-SVM-SpiceIndex-04.jpg",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/images/2012-10-22-MakeMatics-SVM-SpiceIndex-00.jpg",
+		"/Users/markbreneman/Downloads/svm models/README",
+		"/Users/markbreneman/Documents/00 Portfolio and Resume/00 Website/2012 Website Redesign/03 Data/markbreneman.com-blog/source/_posts/2012-10-20-MakeMatics-Week3.md",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/slides/slidesref.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/slides/slides.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/sourcelocalization/app.yaml",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/MakeMatics/05 Outgoing Information/102012-Source Localization/app/main.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/styles/base.css",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/application.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/curve.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/mrdoob-three.js-ef5f05d/examples/webgl_geometry_shapes.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/media/Space02.jpg",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/twitterEarth/twitterearth.sublime-project",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/simpleline.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/mrdoob-three.js-ef5f05d/examples/webgl_ribbons.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/media/earthTexture.png",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/boilerplate/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/THREEx.screenshot.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/GUI Start",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/application.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/templates/TwitterEarth.sublime-workspace",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/twitterEarth/templates/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/boilerplate/101512Boilerplate.sublime-project",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/index.py",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/extramodels.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/models/MESSENGER.dae",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/app.yaml",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS Boilerplate-mb/js/application-mb.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/application.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/three.js",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/ThreeJS.sublime-project",
+		"/Users/markbreneman/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/101112 ThreeJS-GlobePoints.tmproj",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/threejsboilerplate/index.html",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/threejsboilerplate/js/application.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"antharion",
+			":handle",
+			":name",
+			"surface ",
+			"tweets",
+			"tweetIndex",
+			"line",
+			"space",
+			"skybox",
+			"scene",
+			"render",
+			"camera",
+			"controls",
+			"createSpaced",
+			"cubic",
+			"bezier",
+			"position.y",
+			"renderer",
+			"render",
+			"inline",
+			"- Hold down <i>A</i> and move your mouse around to rotate around the scene.\n                        - Hold down <i>S</i> and move your mouse up or down to zoom.\n                        - Hold down <i>D</i> and move your mouse around to pan.",
+			"print",
+			"webgl",
+			"scene",
+			"dae"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"name:",
+			"galaxyBox"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 256.0,
+	"status_bar_visible": true
+}

@@ -30,9 +30,14 @@ end
 
 
 get '/' do
-	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 10).to_s.gsub(/(:name=>)/,"")
-	# => returns back an array of projects from 
-	projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 10)
+	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 1)
+	# => returns back an array of projects from the category/popular
+	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 1)
+	projects = Kickstarter.by_citiesfunding(:San_Francisco,:page => 1, :pages=> 1)
+	
+	 # puts JSON.parse(projects)
+
+
 	count=0
 	projectsJSON=Hash.new 
 	projects.each do |project|
@@ -44,9 +49,9 @@ get '/' do
 	 projectobject["pledge_deadline"]=project.pledge_deadline
 	 projectobject["pledge_percent"]=project.pledge_percent
 	 projectobject["thumbnail_url"]=project.thumbnail_url
+	 projectobject.to_json
 	 count+=1
-	 projectsJSON[count]=project
-
+	 projectsJSON[count]=projectobject
 	end
 
 	# projects.each do |project|
