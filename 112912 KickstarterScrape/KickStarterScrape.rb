@@ -19,12 +19,14 @@ class Project
 def initialize(name,handle,description,owner,pledge_amount,pledge_percent,pledge_deadline,thumbnail_url)
 	@name= name
 	@handle= handle
-	@description=description
 	@owner=owner
+	@url=url
+	@description=description
 	@pledge_amount=pledge_amount
 	@pledge_percent=pledge_percent
 	@pledge_deadline=pledge_deadline
 	@thumbnail_url=thumbnail_url
+	@location=location
  end
 end
 
@@ -33,7 +35,8 @@ get '/' do
 	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 1)
 	# => returns back an array of projects from the category/popular
 	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 1)
-	projects = Kickstarter.by_citiesfunding(:San_Francisco,:page => 1, :pages=> 1)
+	# projects = Kickstarter.by_citiesfunding(:San_Francisco,:page => 1, :pages=> 1)
+	projects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
 	
 	 # puts JSON.parse(projects)
 
@@ -44,11 +47,13 @@ get '/' do
 	 projectobject=Hash.new 
 	 projectobject["name"]=project.name
 	 projectobject["handle"]=project.handle
+	 projectobject["owner"]=project.owner
 	 projectobject["url"]=project.url
 	 projectobject["pledge_amount"]=project.pledge_amount
 	 projectobject["pledge_deadline"]=project.pledge_deadline
 	 projectobject["pledge_percent"]=project.pledge_percent
 	 projectobject["thumbnail_url"]=project.thumbnail_url
+	 projectobject["location"]=project.location
 	 projectobject.to_json
 	 count+=1
 	 projectsJSON[count]=projectobject

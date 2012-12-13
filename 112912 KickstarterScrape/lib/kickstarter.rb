@@ -76,10 +76,10 @@ module Kickstarter
     list_fundingprojects(path, options)
   end
   
-  # def self.by_citiesfunded(cities, options = {})
-  #   path = File.join(BASE_URL, 'discover/cities', Cities[cities.to_sym])
-  #   list_fundedprojects(path, options)
-  # end
+  def self.by_citiesfunded(cities, options = {})
+    path = File.join(BASE_URL, 'discover/cities', Cities[cities.to_sym])
+    list_fundedprojects(path, options)
+  end
 
 
   private
@@ -111,7 +111,7 @@ module Kickstarter
     results
   end
 
-  def self.list_fundingprojects(url, options = {})
+  def self.list_fundedprojects(url, options = {})
     pages = options.fetch(:pages, 0)
     pages -= 1 unless pages == 0 || pages == :all
 
@@ -123,8 +123,8 @@ module Kickstarter
     (start_page..end_page).each do |page|
       retries = 0
       begin
-        doc = Nokogiri::HTML(open("#{url}?/successful=#{page}"))
-        puts doc
+        doc = Nokogiri::HTML(open("#{url}/successful?page=#{page}"))
+        #puts doc
         nodes = doc.css('.project')
         break if nodes.empty?
 
@@ -139,31 +139,31 @@ module Kickstarter
     results
   end
 
-  # def self.list_fundedprojects(url, options = {})
-  #   pages = options.fetch(:pages, 0)
-  #   pages -= 1 unless pages == 0 || pages == :all
+  def self.list_fundingprojects(url, options = {})
+    pages = options.fetch(:pages, 0)
+    pages -= 1 unless pages == 0 || pages == :all
 
-  #   start_page = options.fetch(:page, 1)
-  #   end_page   = pages == :all ? 10000 : start_page + pages
+    start_page = options.fetch(:page, 1)
+    end_page   = pages == :all ? 10000 : start_page + pages
 
-  #   results = []
+    results = []
 
-  #   (start_page..end_page).each do |page|
-  #     retries = 0
-  #     begin
-  #       doc = Nokogiri::HTML(open("#{url}?/successful=#{page}"))
-  #       nodes = doc.css('.project')
-  #       break if nodes.empty?
+    (start_page..end_page).each do |page|
+      retries = 0
+      begin
+        doc = Nokogiri::HTML(open("#{url}/funding?page=#{page}"))
+        nodes = doc.css('.project')
+        break if nodes.empty?
 
-  #       nodes.each do |node|
-  #         results << Kickstarter::Project.new(node)
-  #       end
-  #     rescue Timeout::Error
-  #       retries += 1
-  #       retry if retries < 3
-  #     end
-  #   end
-  #   results
-  # end
+        nodes.each do |node|
+          results << Kickstarter::Project.new(node)
+        end
+      rescue Timeout::Error
+        retries += 1
+        retry if retries < 3
+      end
+    end
+    results
+  end
 
 end

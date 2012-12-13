@@ -45,6 +45,9 @@ module Kickstarter
     end
     
 
+    def location
+      @location ||= node.css('.project-meta .location-name').inner_html
+    end
 
 #     # can be X days|hours left
     # or <strong>FUNDED</strong> Aug 12, 2011
@@ -73,8 +76,10 @@ module Kickstarter
         :pledge_amount   => pledge_amount,
         :pledge_percent  => pledge_percent,
         :pledge_deadline => pledge_deadline,
-        :thumbnail_url   => thumbnail_url
+        :thumbnail_url   => thumbnail_url,
+        :location        => location,
       }
+      
     end
 
     def inspect
