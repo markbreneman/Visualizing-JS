@@ -46,7 +46,8 @@ get '/data' do
 	projects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
 	sfprojects = Kickstarter.by_citiesfunded(:San_Francisco,:page => 1, :pages=> 1)
 	# => returns back an array of projects from the cities/cityname/successful
-
+	totalProjects = projects+sfprojects 
+	puts totalProjects
 	 # puts JSON.parse(projects)
 	links = Array.new(15, Hash.new)
 	# links=[
@@ -70,6 +71,9 @@ get '/data' do
 	projectsArray=Array.new
 
 	
+	total_pledged=0
+	total_pledgedpercent=0
+
 	projectsJSON=Hash.new  
 	projects.each do |project|
 	 projectobject=Hash.new 
@@ -83,17 +87,11 @@ get '/data' do
 	 projectobject["thumbnail_url"]=project.thumbnail_url
 	 projectobject["location"]=project.location
 	 projectobject["group"]="1"
+	 total_pledged+=projectobject["pledge_amount"]
+	 total_pledgedpercent += projectobject["pledge_percent"]
 	 projectobject.to_json
 	 projectsArray.push projectobject
 	end
-	
-	total_pledged=0
-	total_pledgedpercent=0
-	projectsArray.each do |project|
-		total_pledged+=project["pledge_amount"]
-		total_pledgedpercent+=project["pledge_percent"]
-	end
-	# puts total_pledged
 
 	average_pledged=total_pledgedpercent/projectsArray.length
    
@@ -106,8 +104,9 @@ get '/data' do
 	 newyorkobject["group"]="1"
 	projectsArray.insert(0, newyorkobject)
 
+    
     projectsJSON["nodes"]=projectsArray
-	# projectsJSON["links"]=links
+	# # projectsJSON["links"]=links
 	
   # @projects=projects	
   @projects=projectsJSON.to_json
