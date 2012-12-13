@@ -149,8 +149,8 @@ get '/data' do
     newyorkobject=Hash.new
  	newyorkobject["name"]="New York"
 	 newyorkobject["url"]="http://www.kickstarter.com/discover/cities/new-york-ny/successful"
-	 newyorkobject["pledge_amount"]=total_pledged
-	 newyorkobject["pledge_percent"]=average_pledged
+	 newyorkobject["totalPledged_amount"]=total_pledged
+	 newyorkobject["averagedPledgePercent"]=average_pledged
 	 newyorkobject["location"]="New York, NY"
 	 newyorkobject["group"]="1"
 	projectsArray.insert(0, newyorkobject)
@@ -159,15 +159,15 @@ get '/data' do
 laobject=Hash.new
  	laobject["name"]="Los Angeles"
 	 laobject["url"]="http://www.kickstarter.com/discover/cities/los-angeles-la/successful"
-	 laobject["pledge_amount"]=total_pledged
-	 laobject["pledge_percent"]=average_pledged
+	 laobject["totalPledged_amount"]=total_pledged
+	 laobject["averagedPledgePercent"]=average_pledged
 	 laobject["location"]="New York, NY"
 	 laobject["group"]="2"
 	projectsArray.insert(16, laobject)
     
     totalProjectsJSON["nodes"]=projectsArray
     totalProjectsJSON["links"]=linksArray
-    
+
   @projects=totalProjectsJSON.to_json
   
   erb :data
