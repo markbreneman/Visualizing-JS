@@ -47,7 +47,7 @@ get '/data' do
 	sfprojects = Kickstarter.by_citiesfunded(:San_Francisco,:page => 1, :pages=> 1)
 	# => returns back an array of projects from the cities/cityname/successful
 	totalProjects = projects+sfprojects 
-	puts totalProjects
+	# puts totalProjects
 	 # puts JSON.parse(projects)
 	links = Array.new(15, Hash.new)
 	# links=[
@@ -74,8 +74,8 @@ get '/data' do
 	total_pledged=0
 	total_pledgedpercent=0
 
-	projectsJSON=Hash.new  
-	projects.each do |project|
+	totalProjectsJSON=Hash.new  
+	totalProjects.each do |project|
 	 projectobject=Hash.new 
 	 projectobject["name"]=project.name
 	 projectobject["handle"]=project.handle
@@ -86,7 +86,13 @@ get '/data' do
 	 projectobject["pledge_percent"]=project.pledge_percent
 	 projectobject["thumbnail_url"]=project.thumbnail_url
 	 projectobject["location"]=project.location
+
+	 if project.location=="New York, NY"
 	 projectobject["group"]="1"
+	elsif project.location=="San Francisco, CA"
+	projectobject["group"]="2"
+	 end	
+	 
 	 total_pledged+=projectobject["pledge_amount"]
 	 total_pledgedpercent += projectobject["pledge_percent"]
 	 projectobject.to_json
@@ -100,17 +106,17 @@ get '/data' do
 	 newyorkobject["url"]="http://www.kickstarter.com/discover/cities/new-york-ny/successful"
 	 newyorkobject["pledge_amount"]=total_pledged
 	 newyorkobject["pledge_percent"]=average_pledged
-	 newyorkobject["location"]="New_York"
+	 newyorkobject["location"]="New York, NY"
 	 newyorkobject["group"]="1"
 	projectsArray.insert(0, newyorkobject)
 
     
-    projectsJSON["nodes"]=projectsArray
+    totalProjectsJSON["nodes"]=projectsArray
 	# # projectsJSON["links"]=links
 	
   # @projects=projects	
-  @projects=projectsJSON.to_json
-  @sfprojects=sfprojects
+  @projects=totalProjectsJSON.to_json
+  
 
 
 
