@@ -43,34 +43,50 @@ get '/data' do
 	
 	# projects = Kickstarter.by_citiesfunding(:San_Francisco,:page => 1, :pages=> 1)
 	# => returns back an array of projects from the cities/cityname/funding
-	projects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
-	sfprojects = Kickstarter.by_citiesfunded(:San_Francisco,:page => 1, :pages=> 1)
+	
 	# => returns back an array of projects from the cities/cityname/successful
-	totalProjects = projects+sfprojects 
-	# puts totalProjects
-	 # puts JSON.parse(projects)
-	links = Array.new(15, Hash.new)
-	# links=[
- #    {"source":1,"target":0,"value":1},
- #    {"source":2,"target":0,"value":8},
- #    {"source":3,"target":0,"value":10},
- #    {"source":3,"target":2,"value":6},
- #    {"source":4,"target":0,"value":1},
- #    {"source":5,"target":0,"value":1},
- #    {"source":6,"target":0,"value":1},
- #    {"source":7,"target":0,"value":1},
- #    {"source":8,"target":0,"value":2},
- #    {"source":9,"target":0,"value":1},
- #    {"source":11,"target":10,"value":1},
- #    {"source":11,"target":3,"value":3},
- #    {"source":11,"target":2,"value":3},
- #    {"source":11,"target":0,"value":5},
- #    {"source":12,"target":11,"value":1},
- #  ]
+	# nyProjects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
 
-	projectsArray=Array.new
+	nyProjects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
+	# laProjects = Kickstarter.by_citiesfunded(:Los_Angeles,:page => 1, :pages=> 1)
+	# bkProjects = Kickstarter.by_citiesfunded(:Brooklyn,:page => 1, :pages=> 1)
+	# chProjects = Kickstarter.by_citiesfunded(:Chicago,:page => 1, :pages=> 1)
+	# sfProjects = Kickstarter.by_citiesfunded(:San_Francisco,:page => 1, :pages=> 1)
+	# poProjects = Kickstarter.by_citiesfunded(:Portland,:page => 1, :pages=> 1)
+	# seProjects = Kickstarter.by_citiesfunded(:Seattle,:page => 1, :pages=> 1)
+	# auProjects = Kickstarter.by_citiesfunded(:Austin,:page => 1, :pages=> 1)
+	# boProjects = Kickstarter.by_citiesfunded(:Boston,:page => 1, :pages=> 1)
+	# naProjects = Kickstarter.by_citiesfunded(:Nashville,:page => 1, :pages=> 1)
 
 	
+	totalProjects = nyProjects
+	# totalProjects = nyProjects+laProjects+bkProjects+chProjects+sfProjects+poProjects+seProjects+auProjects+boProjects+naProjects
+
+
+	# puts totalProjects
+	 # puts JSON.parse(projects)
+	counter=1
+	linksArray=Array.new
+	link = Array.new(15, Hash.new)
+	link.each do |link|
+	linkobject=Hash.new	
+	linkobject["source"]=0;
+	linkobject["target"]=counter;
+	# linkobject["value"]=1;
+	counter+=1
+	linkobject.to_json
+	linksArray.push linkobject
+	# puts linksArray
+	end
+	linksJSON=Hash.new 
+	linksJSON["links"]=linksArray
+	@links=linksJSON.to_json
+	
+	
+
+#############This where we start going through all the projects and creating the nodes array########	
+	projectsArray=Array.new
+
 	total_pledged=0
 	total_pledgedpercent=0
 
@@ -88,10 +104,26 @@ get '/data' do
 	 projectobject["location"]=project.location
 
 	 if project.location=="New York, NY"
-	 projectobject["group"]="1"
-	elsif project.location=="San Francisco, CA"
-	projectobject["group"]="2"
-	 end	
+	 projectobject["group"]=1
+	# elsif project.location=="Los Angeles, CA"
+	# projectobject["group"]=2
+	# elsif project.location=="Brooklyn, NY"
+	# projectobject["group"]=3
+ #    elsif project.location=="Chicago, IL"
+	# projectobject["group"]=4
+	# elsif project.location=="San Francisco, CA"
+	# projectobject["group"]=5
+	# elsif project.location=="Portland, OR"
+	# projectobject["group"]=6
+	# elsif project.location=="Seattle, WA"
+	# projectobject["group"]=7
+	# elsif project.location=="Austin, TX"
+	# projectobject["group"]=8
+	# elsif project.location=="Boston, MA"
+	# projectobject["group"]=9
+	# elsif project.location=="Nashville, TN"
+	# projectobject["group"]=10
+	end	
 	 
 	 total_pledged+=projectobject["pledge_amount"]
 	 total_pledgedpercent += projectobject["pledge_percent"]
@@ -112,13 +144,12 @@ get '/data' do
 
     
     totalProjectsJSON["nodes"]=projectsArray
+    totalProjectsJSON["links"]=linksArray
 	# # projectsJSON["links"]=links
 	
-  # @projects=projects	
   @projects=totalProjectsJSON.to_json
+
+
   
-
-
-
   erb :data
 end
