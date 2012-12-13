@@ -48,7 +48,7 @@ get '/data' do
 	# nyProjects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
 
 	nyProjects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
-	# laProjects = Kickstarter.by_citiesfunded(:Los_Angeles,:page => 1, :pages=> 1)
+	laProjects = Kickstarter.by_citiesfunded(:Los_Angeles,:page => 1, :pages=> 1)
 	# bkProjects = Kickstarter.by_citiesfunded(:Brooklyn,:page => 1, :pages=> 1)
 	# chProjects = Kickstarter.by_citiesfunded(:Chicago,:page => 1, :pages=> 1)
 	# sfProjects = Kickstarter.by_citiesfunded(:San_Francisco,:page => 1, :pages=> 1)
@@ -59,7 +59,7 @@ get '/data' do
 	# naProjects = Kickstarter.by_citiesfunded(:Nashville,:page => 1, :pages=> 1)
 
 	
-	totalProjects = nyProjects
+	totalProjects = nyProjects+laProjects
 	# totalProjects = nyProjects+laProjects+bkProjects+chProjects+sfProjects+poProjects+seProjects+auProjects+boProjects+naProjects
 
 
@@ -72,12 +72,25 @@ get '/data' do
 	linkobject=Hash.new	
 	linkobject["source"]=0;
 	linkobject["target"]=counter;
-	# linkobject["value"]=1;
+	linkobject["value"]=1;
 	counter+=1
 	linkobject.to_json
 	linksArray.push linkobject
 	# puts linksArray
 	end
+    
+    counter=17
+	link2 = Array.new(15, Hash.new)
+	link2.each do |link|
+	linkobject=Hash.new	
+	linkobject["source"]=16;
+	linkobject["target"]=counter;
+	linkobject["value"]=1;
+	counter+=1
+	linkobject.to_json
+	linksArray.push linkobject
+	end
+
 	linksJSON=Hash.new 
 	linksJSON["links"]=linksArray
 	@links=linksJSON.to_json
@@ -105,8 +118,8 @@ get '/data' do
 
 	 if project.location=="New York, NY"
 	 projectobject["group"]=1
-	# elsif project.location=="Los Angeles, CA"
-	# projectobject["group"]=2
+	elsif project.location=="Los Angeles, CA"
+	projectobject["group"]=2
 	# elsif project.location=="Brooklyn, NY"
 	# projectobject["group"]=3
  #    elsif project.location=="Chicago, IL"
@@ -142,14 +155,20 @@ get '/data' do
 	 newyorkobject["group"]="1"
 	projectsArray.insert(0, newyorkobject)
 
+
+laobject=Hash.new
+ 	laobject["name"]="Los Angeles"
+	 laobject["url"]="http://www.kickstarter.com/discover/cities/los-angeles-la/successful"
+	 laobject["pledge_amount"]=total_pledged
+	 laobject["pledge_percent"]=average_pledged
+	 laobject["location"]="New York, NY"
+	 laobject["group"]="2"
+	projectsArray.insert(16, laobject)
     
     totalProjectsJSON["nodes"]=projectsArray
     totalProjectsJSON["links"]=linksArray
-	# # projectsJSON["links"]=links
-	
+    
   @projects=totalProjectsJSON.to_json
-
-
   
   erb :data
 end
