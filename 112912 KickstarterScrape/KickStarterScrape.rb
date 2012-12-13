@@ -32,12 +32,20 @@ end
 
 
 get '/' do
+	
+erb :KickstarterForceGraph
+end
+
+get '/data' do
+
 	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 1)
 	# => returns back an array of projects from the category/popular
-	# projects = Kickstarter.by_category(:technology,:page => 1, :pages=> 1)
-	# projects = Kickstarter.by_citiesfunding(:San_Francisco,:page => 1, :pages=> 1)
-	projects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
 	
+	# projects = Kickstarter.by_citiesfunding(:San_Francisco,:page => 1, :pages=> 1)
+	# => returns back an array of projects from the cities/cityname/funding
+	projects = Kickstarter.by_citiesfunded(:New_York,:page => 1, :pages=> 1)
+	# => returns back an array of projects from the cities/cityname/successful
+
 	 # puts JSON.parse(projects)
 
 
@@ -59,15 +67,9 @@ get '/' do
 	 projectsJSON[count]=projectobject
 	end
 
-	# projects.each do |project|
-	# 	puts project.name
-	# end
-
-
-	# @projects=projects[1].name
-	# render :json => @projects.to_json
-
+  # @projects=projects	
   @projects=projectsJSON.to_json
-  erb :main
 
+
+  erb :data
 end
