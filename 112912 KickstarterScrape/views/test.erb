@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+
+circle {
+  stroke-width: 1.5px;
+}
+
+line {
+  stroke: #999;
+}
+
+</style>
+  <head>
+    <title>Force-Directed Layout</title>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+
+  </head>
+  <body>
+
+  </body>​
+<script>
+var w = 660,
+    h = 600,
+    r = 12,
+    fill = d3.scale.category20();
+
+var test = "";
+
+var force = d3.layout.force().charge(-120).linkDistance(150).size([w, h]);
+
+var svg = d3.select("body").append("svg:svg").attr("width", w).attr("height", h);
+
+
+d3.json("/readme.json", function(json) {
+    var link = svg.selectAll("line").data(json.links).enter().append("svg:line").style("stroke-width", function(d) {
+        return Math.sqrt(d.value);
+    }).style("stroke-opacity", function(d) {
+        return d.value / 10;
+    });
+
+    var node = svg.selectAll("circle")
+    .data(json.nodes)
+    .enter()
+    .append("svg:circle")
+    .attr("r", r - .75)
+    .style("fill",function(d) { return fill(d.group);})
+    .style("stroke", function(d) {return d3.rgb(fill(d.group)).darker();})
+    .call(force.drag)
+    .on("mouseover", fade(.1, ""))
+    .on("mouseout", fade(function(d) {return d.value / 10;}, "none"));;
+
+    var circles = svg.selectAll("circle").each(function(d) {
+        var r = "c" + Math.round(Math.random() * 1000000);
+        d3.select(this).attr("class", r);
+        svg.append("svg:text")
+        .attr("class", r)
+        .attr("x", d.x + 5)
+        .attr("y", d.y + 5)
+        .style("font-size", "18 px")
+        .style("fill", "#5C5C5C")
+        .style("pointer-events", 'none')
+        .text(function() {
+            return d.name;
+        })
+        .style("display", "none");
+    });
+
+    force.nodes(json.nodes).links(json.links).on("tick", tick).start();
+
+    var linkedByIndex = {};
+    json.links.forEach(function(d) {
+        linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
+
+
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+    }
+
+    function tick() {
+        node.attr("cx", function(d) {
+            return d.x = Math.max(r, Math.min(w - r, d.x));
+        }).attr("cy", function(d) {
+            return d.y = Math.max(r, Math.min(h - r, d.y));
+        });
+
+        link.attr("x1", function(d) {
+            return d.source.x;
+        }).attr("y1", function(d) {
+            return d.source.y;
+        }).attr("x2", function(d) {
+            return d.target.x;
+        }).attr("y2", function(d) {
+            return d.target.y;
+        });
+
+        circles.each(function(d) {
+            var c = d3.select(this),
+                r = c.attr("class"),
+                t = svg.selectAll("text." + r);
+
+            t.attr("x", c.attr("cx"));
+            t.attr("y", c.attr("cy"));
+        });
+
+    }
+
+
+    function fade(opacity, disp) {
+
+        return function(d) {
+            node.style("stroke-opacity", function(o) {
+                var c = d3.select(this),
+                    r = c.attr("class"),
+                    t = svg.selectAll("text." + r);
+
+                if (isConnected(d, o)) {
+                    t.style("display", disp);
+                    thisOpacity = 1;
+                } else {
+                    t.style("display", "none");
+                    thisOpacity = opacity;
+                }
+
+                this.setAttribute('fill-opacity', thisOpacity);
+                return thisOpacity;
+            });
+
+            link.style("stroke-opacity", opacity).style("stroke-opacity", function(o) {
+                return o.source === d || o.target === d ? o.value / 10 : opacity;
+            });
+        };
+    }
+})
+</script>
+  </html>

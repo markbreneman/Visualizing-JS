@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+circle {
+  stroke-width: 1.5px;
+}
+
+line {
+  stroke: #b0b0b0;
+  stroke-width: 1.5px;
+}
+
+text {
+  font: 10px sans-serif;
+
+}
+</style>
+<body>
+<title>KickStarter Forces</title>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script> -->
+
+<script>
+
+d3.select("body").style("background-color", "black");
+
+var width = 1100,
+    height = 800;
+    color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-180)
+    .linkDistance(150)
+    .size([width, height]);
+
+var svg = d3.select("body")
+    .append("svg:svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("id", "drawing")
+    .attr("viewbox", "0 0 960 500")
+    .attr("preserveAspectRatio", "xMidYMid")
+
+d3.json("/data", function(error,json) {
+
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+    var link = svg.selectAll("line")
+    .data(json.links)
+    .enter()
+    .append("svg:line")
+   .style("stroke-width", function(d) {
+        return d.value;
+    })
+    .style("stroke-opacity", function(d) {
+        return d.value;
+    });
+
+    var node = svg.selectAll("circle")
+    .data(json.nodes)
+    .enter()
+    .append("svg:circle")
+    .attr("r", function(d) { return Math.sqrt(d.pledge_amount) / 7 ; })
+    .style("fill",function(d) { return color(d.group);})
+    .style("stroke", function(d) {return d3.rgb(color(d.group)).darker();})
+    .call(force.drag)
+    .on("mouseover", fade(.1, ""))
+    .on("mouseout", fade(function(d) {return 10}, "none"));;
+
+    var circles = svg.selectAll("circle").each(function(d) {
+        var r = "c" + Math.round(Math.random() * 1000000);
+        console.log(r);
+        // var r = "c" + Math.round(Math.random() * 1000000);
+        d3.select(this).attr("class", r);
+        svg.append("svg:text")
+        .attr("class", r)
+        .attr("x", d.x + 5)
+        .attr("y", d.y + 5)
+        .style("font-size", "18 px")
+        .style("fill", "#f0f0f0")
+        .style("pointer-events", 'none')
+        .text(function() {
+            return d.name +" $ " + d.pledge_amount;
+        })
+        .style("display", "none");
+    });
+
+    force.nodes(json.nodes).links(json.links).on("tick", tick).start();
+
+    var linkedByIndex = {};
+    json.links.forEach(function(d) {
+        linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+    }
+
+    function tick() {
+        // node
+        // .attr("cx", function(d) {
+        //     return d.x = Math.max(Math.sqrt(d.pledge_amount) / 7, Math.min(height - Math.sqrt(d.pledge_amount) / 7, d.x));
+        // })
+        // .attr("cy", function(d) {
+        //     return d.y = Math.max(Math.sqrt(d.pledge_amount) / 7, Math.min(width - Math.sqrt(d.pledge_amount) / 7, d.y));
+        // });
+
+        node
+        // .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .attr("cx",function(d){return d.x})
+        .attr("cy",function(d){return d.y})
+
+        
+        link.attr("x1", function(d) {
+            return d.source.x;
+        }).attr("y1", function(d) {
+            return d.source.y;
+        }).attr("x2", function(d) {
+            return d.target.x;
+        }).attr("y2", function(d) {
+            return d.target.y;
+        });
+
+        circles.each(function(d) {
+            var c = d3.select(this),
+                r = c.attr("class"),
+                t = svg.selectAll("text." + r);
+
+            t.attr("x", c.attr("cx"));
+            t.attr("y", c.attr("cy"));
+        });
+
+    }
+
+
+    function fade(opacity, disp) {
+
+        return function(d) {
+            node.style("stroke-opacity", function(o) {
+                var c = d3.select(this),
+                    r = c.attr("class"),
+                    t = svg.selectAll("text." + r);
+
+                if (isConnected(d, o)) {
+                    t.style("display", disp);
+                    thisOpacity = 1;
+                } else {
+                    t.style("display", "none");
+                    thisOpacity = opacity;
+                }
+
+                this.setAttribute('fill-opacity', thisOpacity);
+                return thisOpacity;
+            });
+
+            link.style("stroke-opacity", opacity).style("stroke-opacity", function(o) {
+                return o.source === d || o.target === d ? o.value / 10 : opacity;
+            });
+        };
+    }
+})
+
+
+
+var chart = $("#drawing"),
+    aspect = chart.width() / chart.height(),
+    container = chart.parent();
+$(window).on("resize", function() {
+    var targetWidth = container.width();
+    chart.attr("width", targetWidth);
+    chart.attr("height", Math.round(targetWidth / aspect));
+}).trigger("resize");
+
+  // console.log("nodes")
+  // console.log(node)
+  // console.log("links")
+  // console.log(link)
+
+
+
+</script>

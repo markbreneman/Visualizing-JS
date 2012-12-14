@@ -4,16 +4,48 @@
 		"selected_items":
 		[
 			[
+				"plede",
+				"pledge_amount"
+			],
+			[
+				"bk",
+				"bkProjects"
+			],
+			[
+				"links",
+				"linksArray"
+			],
+			[
+				"project",
+				"projectsArray"
+			],
+			[
+				"proje",
+				"projectsArray"
+			],
+			[
+				"projects",
+				"projectsArray"
+			],
+			[
+				"pro",
+				"projectsArray"
+			],
+			[
+				"pl",
+				"pledge_amount"
+			],
+			[
+				"new",
+				"New_York"
+			],
+			[
 				"pledge",
 				"pledge_deadline"
 			],
 			[
 				"pled",
 				"pledge_amount"
-			],
-			[
-				"pl",
-				"pledge_deadline"
 			],
 			[
 				"normaliz",
@@ -128,7 +160,22 @@
 	},
 	"file_history":
 	[
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/public/readme.json",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/views/KickstarterForceGraph.erb",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/KickStarterScrape.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/views/data.erb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/lib/kickstarter.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/views/test.erb",
+		"/Users/markbreneman/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/Gemfile.lock",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/public/miserables.json",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/README",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/TestData.txt",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/lib/kickstarter/project.rb",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/Gemfile",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/Procfile",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/.gitignore",
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/112912 KickstarterScrape/lib/kickstarter/version.rb",
 		"/Users/markbreneman/Desktop/100812_OffLeashHerokuWithMongoDB/OffLeash.sublime-project",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/views/main.erb",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/03 Data/112912 KickstarterScrape/lib/kickstarter/project.rb",
@@ -185,7 +232,6 @@
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/application.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/static/scripts/three.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/ThreeJS.sublime-project",
-		"/Users/markbreneman/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/101112 ThreeJS-GlobePoints.tmproj",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/threejsboilerplate/index.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101112 ThreeJS-GlobePoints/threejsboilerplate/js/application.js"
@@ -196,7 +242,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			""
@@ -204,9 +250,20 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"bkTotalPledge",
+			"average_pledged",
+			"total_pledged",
+			"averagedPledgePercent",
+			"totalPledged_amount",
+			"PledgeAverage",
+			"puts",
+			"pusts",
+			"puts",
+			"push",
+			"myriel",
 			"antharion",
 			":handle",
 			":name",
@@ -239,6 +296,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"AveragePledged",
+			"TotalPLedged",
+			"averagedPledged",
+			"TotalPledge",
 			"name:",
 			"galaxyBox"
 		],

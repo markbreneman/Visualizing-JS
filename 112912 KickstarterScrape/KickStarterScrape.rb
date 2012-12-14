@@ -33,8 +33,17 @@ end
 
 get '/' do
 	
-erb :KickstarterForceGraph
+# erb :KickstarterForceGraph
+erb :KickstarterForceGrapht
+
 end
+
+get '/test' do
+
+erb :test
+end
+
+
 
 get '/data' do
 
@@ -58,54 +67,29 @@ get '/data' do
 	boProjects = Kickstarter.by_citiesfunded(:Boston,:page => 1, :pages=> 1)
 	naProjects = Kickstarter.by_citiesfunded(:Nashville,:page => 1, :pages=> 1)
 
-	
-	# totalProjects = nyProjects+laProjects
 	totalProjects = nyProjects+laProjects+bkProjects+chProjects+sfProjects+poProjects+seProjects+auProjects+boProjects+naProjects
-
-
-	# puts totalProjects
-
-	# counter=1
-	# linksArray=Array.new
-	# link = Array.new(15, Hash.new)
-	# link.each do |link|
-	# linkobject=Hash.new	
-	# linkobject["source"]=0;
-	# linkobject["target"]=counter;
-	# linkobject["value"]=1;
-	# counter+=1
-	# linkobject.to_json
-	# linksArray.push linkobject
-	# # puts linksArray
-	# end
-    
- 	# counter=17
-	# link2 = Array.new(15, Hash.new)
-	# link2.each do |link|
-	# linkobject=Hash.new	
-	# linkobject["source"]=16;
-	# linkobject["target"]=counter;
-	# linkobject["value"]=1;
-	# counter+=1
-	# linkobject.to_json
-	# linksArray.push linkobject
-	# end
-
-	# linksJSON=Hash.new 
-	# linksJSON["links"]=linksArray
-	# @links=linksJSON.to_json
 	
-
 #############This where we start going through all the projects and creating the nodes array########	
 	projectsArray=Array.new
 
-	total_pledged=0
-	total_pledgedpercent=0
+	nyTotalPledge=0
+	laTotalPledge=0
+	bkTotalPledge=0
+	chTotalPledge=0
+	sfTotalPledge=0
+	poTotalPledge=0
+	seTotalPledge=0
+	auTotalPledge=0
+	boTotalPledge=0
+	naTotalPledge=0
+	totalPledgedAllCities=0
 
+	index=0
 	totalProjectsJSON=Hash.new  
 	totalProjects.each do |project|
 	 projectobject=Hash.new 
 	 projectobject["name"]=project.name
+	 projectobject["id"]=index
 	 projectobject["handle"]=project.handle
 	 projectobject["owner"]=project.owner
 	 projectobject["url"]=project.url
@@ -117,43 +101,78 @@ get '/data' do
 
 	 if project.location=="New York, NY"
 	 projectobject["group"]=1
+	 nyTotalPledge+=project.pledge_amount
+	
 	elsif project.location=="Los Angeles, CA"
 	projectobject["group"]=2
+	laTotalPledge+=project.pledge_amount
+
 	elsif project.location=="Brooklyn, NY"
 	projectobject["group"]=3
+    bkTotalPledge+=project.pledge_amount
+
     elsif project.location=="Chicago, IL"
 	projectobject["group"]=4
+	chTotalPledge+=project.pledge_amount
+
 	elsif project.location=="San Francisco, CA"
 	projectobject["group"]=5
+	sfTotalPledge+=project.pledge_amount
+
 	elsif project.location=="Portland, OR"
 	projectobject["group"]=6
+	poTotalPledge+=project.pledge_amount
+
 	elsif project.location=="Seattle, WA"
 	projectobject["group"]=7
+	seTotalPledge+=project.pledge_amount
+
 	elsif project.location=="Austin, TX"
 	projectobject["group"]=8
+	auTotalPledge+=project.pledge_amount
+
 	elsif project.location=="Boston, MA"
 	projectobject["group"]=9
+	boTotalPledge+=project.pledge_amount
+
 	elsif project.location=="Nashville, TN"
 	projectobject["group"]=10
+	naTotalPledge+=project.pledge_amount
 	end	
 	 
-	 total_pledged+=projectobject["pledge_amount"]
-	 total_pledgedpercent += projectobject["pledge_percent"]
+	 totalPledgedAllCities+=projectobject["pledge_amount"]
+
 	 projectobject.to_json
 	 projectsArray.push projectobject
+	 index+=1
 	end
 
-	average_pledged=total_pledgedpercent/projectsArray.length
-   
-   
+
+
+	totalnumberofprojects=projectsArray.length
+	totalnumberofcities=10
+	numProjectPercity=totalnumberofprojects/totalnumberofcities
+	nyAveragePledged=nyTotalPledge/numProjectPercity
+	laAveragePledged=laTotalPledge/numProjectPercity
+	bkAveragePledged=bkTotalPledge/numProjectPercity
+	chAveragePledged=chTotalPledge/numProjectPercity
+	sfAveragePledged=sfTotalPledge/numProjectPercity
+	poAveragePledged=poTotalPledge/numProjectPercity
+	seAveragePledged=seTotalPledge/numProjectPercity
+	auAveragePledged=auTotalPledge/numProjectPercity
+	boAveragePledged=boTotalPledge/numProjectPercity
+	naAveragePledged=naTotalPledge/numProjectPercity
+
+
    
   
    ###########ADD IN CITIES AS NODES###########
     nyobject=Hash.new
  	nyobject["name"]="New York"
 	 nyobject["url"]="http://www.kickstarter.com/discover/cities/new-york-ny/successful"
-	 nyobject["totalPledged_amount"]=total_pledged
-	 nyobject["averagedPledgePercent"]=average_pledged
+	 nyobject["totalPledged"]=nyTotalPledge
+	 nyobject["pledge_amount"]=nyAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 nyobject["averagedPledged"]=nyAveragePledged
 	 nyobject["location"]="New York, NY"
 	 nyobject["group"]=1
 	projectsArray.insert(0, nyobject)
@@ -162,8 +181,9 @@ get '/data' do
 	laobject=Hash.new
  	laobject["name"]="Los Angeles"
 	 laobject["url"]="http://www.kickstarter.com/discover/cities/los-angeles-la/successful"
-	 laobject["totalPledged_amount"]=total_pledged
-	 laobject["averagedPledgePercent"]=average_pledged
+	 laobject["totalPledged"]=laTotalPledge
+	 laobject["pledge_amount"]=laAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 laobject["averagedPledged"]=laAveragePledged
 	 laobject["location"]="Los Angeles, CA"
 	 laobject["group"]=2
 	projectsArray.insert(16, laobject)
@@ -171,8 +191,9 @@ get '/data' do
 	bkobject=Hash.new
  	bkobject["name"]="Brooklyn"
 	 bkobject["url"]="http://www.kickstarter.com/discover/cities/brooklyn-ny/successful"
-	 bkobject["totalPledged_amount"]=total_pledged
-	 bkobject["averagedPledgePercent"]=average_pledged
+	 bkobject["totalPledged"]=bkTotalPledge
+	 bkobject["pledge_amount"]=bkAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 bkobject["averagedPledged"]=bkAveragePledged
 	 bkobject["location"]="Brooklyn, NY"
 	 bkobject["group"]=3
 	projectsArray.insert(32, bkobject)
@@ -180,8 +201,9 @@ get '/data' do
 	chobject=Hash.new
  	chobject["name"]="Chicago"
 	 chobject["url"]="http://www.kickstarter.com/discover/cities/chicago-il/successful"
-	 chobject["totalPledged_amount"]=total_pledged
-	 chobject["averagedPledgePercent"]=average_pledged
+	 chobject["totalPledged"]=chTotalPledge
+	 chobject["pledge_amount"]=chAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 chobject["averagedPledged"]=chAveragePledged
 	 chobject["location"]="Chicago, IL"
 	 chobject["group"]=4
 	projectsArray.insert(48, chobject)
@@ -189,8 +211,9 @@ get '/data' do
 	sfobject=Hash.new
  	sfobject["name"]="San Francisco"
 	 sfobject["url"]="http://www.kickstarter.com/discover/cities/san-franciso-ca/successful"
-	 sfobject["totalPledged_amount"]=total_pledged
-	 sfobject["averagedPledgePercent"]=average_pledged
+	 sfobject["totalPledged"]=sfTotalPledge
+	 sfobject["pledge_amount"]=sfAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 sfobject["averagedPledged"]=sfAveragePledged
 	 sfobject["location"]="San Franciso, CA"
 	 sfobject["group"]=5
 	projectsArray.insert(64, sfobject)
@@ -198,8 +221,9 @@ get '/data' do
 	poobject=Hash.new
  	poobject["name"]="Portland"
 	 poobject["url"]="http://www.kickstarter.com/discover/cities/portland-or/successful"
-	 poobject["totalPledged_amount"]=total_pledged
-	 poobject["averagedPledgePercent"]=average_pledged
+	 poobject["totalPledged"]=poTotalPledge
+	 poobject["pledge_amount"]=poAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 poobject["averagedPledged"]=poAveragePledged
 	 poobject["location"]="Portland, OR"
 	 poobject["group"]=6
 	projectsArray.insert(80, poobject)
@@ -207,8 +231,9 @@ get '/data' do
 	seobject=Hash.new
  	seobject["name"]="Seattle"
 	 seobject["url"]="http://www.kickstarter.com/discover/cities/brooklyn-ny/successful"
-	 seobject["totalPledged_amount"]=total_pledged
-	 seobject["averagedPledgePercent"]=average_pledged
+	 seobject["totalPledge"]=seTotalPledge
+	 seobject["pledge_amount"]=seAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 seobject["averagedPledged"]=seAveragePledged
 	 seobject["location"]="Seattle, WA"
 	 seobject["group"]=7
 	projectsArray.insert(96, seobject)
@@ -216,8 +241,9 @@ get '/data' do
 	auobject=Hash.new
  	auobject["name"]="Austin"
 	 auobject["url"]="http://www.kickstarter.com/discover/cities/austin-tx/successful"
-	 auobject["totalPledged_amount"]=total_pledged
-	 auobject["averagedPledgePercent"]=average_pledged
+	 auobject["totalPledge"]=auTotalPledge
+	 auobject["pledge_amount"]=auAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 auobject["averagedPledged"]=auAveragePledged
 	 auobject["location"]="Austin, TX"
 	 auobject["group"]=8
 	projectsArray.insert(112, auobject)
@@ -225,8 +251,9 @@ get '/data' do
 	boobject=Hash.new
  	boobject["name"]="Boston"
 	 boobject["url"]="http://www.kickstarter.com/discover/cities/boston-ma/successful"
-	 boobject["totalPledged_amount"]=total_pledged
-	 boobject["averagedPledgePercent"]=average_pledged
+	 boobject["totalPledge"]=boTotalPledge
+	 boobject["pledge_amount"]=boAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 boobject["averagedPledged"]=boAveragePledged
 	 boobject["location"]="Boston, MA"
 	 boobject["group"]=9
 	projectsArray.insert(128, boobject)
@@ -234,8 +261,9 @@ get '/data' do
 	naobject=Hash.new
  	naobject["name"]="Nashville"
 	 naobject["url"]="http://www.kickstarter.com/discover/cities/boston-ma/successful"
-	 naobject["totalPledged_amount"]=total_pledged
-	 naobject["averagedPledgePercent"]=average_pledged
+	 naobject["totalPledge"]=naTotalPledge
+	 naobject["pledge_amount"]=naAveragePledged#This is a hack for sizing rather than doing it in javascript
+	 naobject["averagedPledged"]=naAveragePledged
 	 naobject["location"]="Nashville, TN"
 	 naobject["group"]=10
 	projectsArray.insert(144, naobject)
@@ -247,7 +275,6 @@ get '/data' do
    
    for projects in projectsArray do
    	linkobject=Hash.new	
-   	
    	if projects["group"]==1
 	linkobject["source"]=0;
 	elsif projects["group"]==2
@@ -276,10 +303,6 @@ get '/data' do
 	linkobject.to_json
 	linksArray.push linkobject
     end
-
-
-
-
 
     linksJSON=Hash.new 
 	linksJSON["links"]=linksArray
