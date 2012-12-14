@@ -2,14 +2,13 @@
 <meta charset="utf-8">
 <style>
 
-.node {
-  /*stroke: #fff;*/
+circle {
   stroke-width: 1.5px;
 }
 
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
+line {
+  stroke: #b0b0b0;
+  stroke-width: 1.5px;
 }
 
 text {
@@ -18,9 +17,10 @@ text {
 }
 </style>
 <body>
-
+<title>KickStarter Forces</title>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script> -->
 
 <script>
 
@@ -28,108 +28,107 @@ d3.select("body").style("background-color", "black");
 
 var width = 1100,
     height = 800;
-
-var color = d3.scale.category20();
+    color = d3.scale.category20();
 
 var force = d3.layout.force()
     .charge(-180)
-    .linkDistance(100)
+    .linkDistance(150)
     .size([width, height]);
 
-var svg = d3.select("body").append("svg")
-    .attr("id", "drawing")
+var svg = d3.select("body")
+    .append("svg:svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("id", "drawing")
     .attr("viewbox", "0 0 960 500")
     .attr("preserveAspectRatio", "xMidYMid")
 
-  d3.json("/data", function(error, json) {
+d3.json("/data", function(error,json) {
+
   force
       .nodes(json.nodes)
       .links(json.links)
       .start();
 
-
-  var link = svg.selectAll("line.link")
-      .data(json.links)
-      .enter()
-      .append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-  var node = svg.selectAll(".node")
-      .data(json.nodes)
-      .enter().append("g")
-      .attr("class", "node")
-      .on("mouseover", nodeMouseover, fade(.1, "") )
-      .on("mouseout", nodeMouseout, fade(function(d) {return d.value / 10;}, "none"))
-      .call(force.drag);
-
-
-  node.append("circle")
-        .attr("r", function(d) { return Math.sqrt(d.pledge_amount) / 7 ; })
-        .style("fill", function(d) { return color(d.group); })
-        .style("stroke", "white") 
-
-  node.append("text")
-      .attr("dx", 12)
-      .attr("dy", ".35em")
-      .style("fill", "white")
-      .text(function(d) {
-        if (d.name== "New York" ||d.name== "Brooklyn" || d.name=="Chicago" || d.name=="Los Angeles" || d.name=="San Francisco" || d.name=="Portland" || d.name=="Austin" || d.name=="Seattle" || d.name=="Boston" || d.name=="Nashville"){       
-       return d.name ;}
-       else{ 
-        return null;}
-       return d.name +" "+ "$ " + d.pledge_amount
-       })
-
-
-var linkedByIndex = {};
-
-json.links.forEach(function(d) {
-    linkedByIndex[d.source.index + "," + d.target.index] = 1;
-});
-
-function isConnected(a, b) {
-    return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
-}
-
-
-force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-    
+    var link = svg.selectAll("line")
+    .data(json.links)
+    .enter()
+    .append("svg:line")
+   .style("stroke-width", function(d) {
+        return d.value;
+    })
+    .style("stroke-opacity", function(d) {
+        return d.value;
     });
 
+    var node = svg.selectAll("circle")
+    .data(json.nodes)
+    .enter()
+    .append("svg:circle")
+    .attr("r", function(d) { return Math.sqrt(d.pledge_amount) / 7 ; })
+    .style("fill",function(d) { return color(d.group);})
+    .style("stroke", function(d) {return d3.rgb(color(d.group)).darker();})
+    .call(force.drag)
+    .on("mouseover", fade(.1, ""))
+    .on("mouseout", fade(function(d) {return 10}, "none"));;
 
-});
+    var circles = svg.selectAll("circle").each(function(d) {
+        var r = "c" + Math.round(Math.random() * 1000000);
+        console.log(r);
+        // var r = "c" + Math.round(Math.random() * 1000000);
+        d3.select(this).attr("class", r);
+        svg.append("svg:text")
+        .attr("class", r)
+        .attr("x", d.x + 5)
+        .attr("y", d.y + 5)
+        .style("font-size", "18 px")
+        .style("fill", "#f0f0f0")
+        .style("pointer-events", 'none')
+        .text(function() {
+            return d.name +" $ " + d.pledge_amount;
+        })
+        .style("display", "none");
+    });
 
+    force.nodes(json.nodes).links(json.links).on("tick", tick).start();
 
- function nodeMouseover() {
-        d3.select(this).select("circle").transition()
-            .duration(250)
-      .attr("r", function(d,i) { return Math.sqrt(d.pledge_amount) / 7 + 10} );
-  d3.select(this).select("text").transition()
-            .duration(250)
-      .style("font", "bold 20px Arial")
-      .attr("fill", "Blue");
-      }
+    var linkedByIndex = {};
+    json.links.forEach(function(d) {
+        linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
 
-  function nodeMouseout() {
-    d3.select(this).select("circle").transition()
-      .duration(250)
+    function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+    }
 
-      .attr("r", function(d,i) { return Math.sqrt(d.pledge_amount) / 7 } );
-    d3.select(this).select("text").transition()
-      .duration(250)
-      .style("font", "normal 10px Arial")
-      .attr("fill", "Blue");
-      }
+    function tick() {
+        node
+        .attr("cx",function(d){return d.x})
+        .attr("cy",function(d){return d.y})
 
-  function fade(opacity, disp) {
+        
+        link.attr("x1", function(d) {
+            return d.source.x;
+        }).attr("y1", function(d) {
+            return d.source.y;
+        }).attr("x2", function(d) {
+            return d.target.x;
+        }).attr("y2", function(d) {
+            return d.target.y;
+        });
+
+        circles.each(function(d) {
+            var c = d3.select(this),
+                r = c.attr("class"),
+                t = svg.selectAll("text." + r);
+
+            t.attr("x", c.attr("cx"));
+            t.attr("y", c.attr("cy"));
+        });
+
+    }
+
+    function fade(opacity, disp) {
 
         return function(d) {
             node.style("stroke-opacity", function(o) {
@@ -154,6 +153,7 @@ force.on("tick", function() {
             });
         };
     }
+})
 
 
 
@@ -166,11 +166,10 @@ $(window).on("resize", function() {
     chart.attr("height", Math.round(targetWidth / aspect));
 }).trigger("resize");
 
-  console.log("nodes")
-  console.log(node)
-  console.log("links")
-  console.log(link)
-
+  // console.log("nodes")
+  // console.log(node)
+  // console.log("links")
+  // console.log(link)
 
 
 
