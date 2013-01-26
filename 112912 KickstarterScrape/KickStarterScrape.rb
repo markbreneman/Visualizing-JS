@@ -33,15 +33,14 @@ end
 
 get '/' do
 	
-# erb :KickstarterForceGraph
-erb :KickstarterForceGrapht
+erb :KickstarterForceGraph
 
 end
 
-get '/test' do
+# get '/test' do
 
-erb :test
-end
+# erb :test
+# end
 
 
 
